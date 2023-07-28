@@ -1,0 +1,1866 @@
+Fetching Page 1
+Fetching Page 2
+Fetching Page 3
+Fetching Page 4
+Fetching Page 5
+Fetching Page 6
+Fetching Page 7
+Fetching Page 8
+Fetching Page 9
+Fetching Page 10
+Fetching Page 11
+Fetching Page 12
+Fetching Page 13
+Fetching Page 14
+Fetching Page 15
+Fetching Page 16
+Fetching Page 17
+Fetching Page 18
+Fetching Page 19
+Fetching Page 20
+Fetching Page 21
+Fetching Page 22
+Fetching Page 23
+Fetching Page 24
+Fetching Page 25
+Fetching Page 26
+Fetching Page 27
+Fetching Page 28
+Fetching Page 29
+Fetching Page 30
+Fetching Page 31
+Fetching Page 32
+Fetching Page 33
+Fetching Page 34
+Fetching Page 35
+Fetching Page 36
+Fetching Page 37
+Fetching Page 38
+Fetching Page 39
+Fetching Page 40
+Fetching Page 41
+Fetching Page 42
+Fetching Page 43
+Fetching Page 44
+Fetching Page 45
+Fetching Page 46
+Fetching Page 47
+Fetching Page 48
+Fetching Page 49
+Fetching Page 50
+Fetching Page 51
+Fetching Page 52
+Fetching Page 53
+Fetching Page 54
+Fetching Page 55
+Fetching Page 56
+Fetching Page 57
+Fetching Page 58
+Fetching Page 59
+Fetching Page 60
+Fetching Page 61
+Fetching Page 62
+Fetching Page 63
+Fetching Page 64
+Fetching Page 65
+Fetching Page 66
+Fetching Page 67
+Fetching Page 68
+Fetching Page 69
+Fetching Page 70
+Fetching Page 71
+Fetching Page 72
+Fetching Page 73
+Fetching Page 74
+Processing 13 Sentinels: Aegis Rim, v1.10 + Yuzu/Ryujinx Emus for PC
+Processing 35MM v1.1
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching 35MM v1.1
+Processing 890B – v1.2.3
+Processing A Boy and His Blob
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching A Boy and His Blob
+Processing A Distant Stabbing
+Processing A Memoir Blue
+Processing A-Train: All Aboard! Tourism – v29723.505
+Processing A.V.
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching A.V.
+Processing Aaru's Awakening
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Aaru's Awakening
+Processing Abermore
+Processing Abi and the Soul
+Processing Act of Aggression: Reboot Edition
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Act of Aggression: Reboot Edition
+Processing Adam's Venture: Origins – Special Edition
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Adam's Venture: Origins – Special Edition
+Processing Aery: A New Frontier
+Processing Aery: Calm Mind 2
+Processing Aethernaut – v1.00.02s
+Processing AFL Evolution 2 + Season Pack 2021 DLC
+Processing Afro Samurai 2: Revenge of Kuma – Volume 1
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Afro Samurai 2: Revenge of Kuma – Volume 1
+Processing Age of Empires IV – v5.0.7274.0 (Steam) + 2 DLCs
+Processing Age of Grit
+Processing Age of Wonders 3: Eternal Lords
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Age of Wonders 3: Eternal Lords
+Processing Agent Intercept – v5.0
+Processing AI War 2: Complete Edition- v5.000 + 3 DLCs
+Processing Air Guardians
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Air Guardians
+Processing Airplane Racer 2021
+Processing Airport Firefighters: The Simulation
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Airport Firefighters: The Simulation
+Processing Albedo: Eyes from Outer Space
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Albedo: Eyes from Outer Space
+Processing Alekhine's Gun
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Alekhine's Gun
+Processing Alfred Hitchcock: Vertigo – v1.0.128
+Processing Alice VR – v.1.2.4.1
+Processing Alien: Isolation v1.0/Update 9 + All DLCs
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Alien: Isolation v1.0/Update 9 + All DLCs
+Processing Alone in the Dark: Illumination
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Alone in the Dark: Illumination
+Processing Alpine: The Simulation Game
+Processing ALTF4 + Bug Fix_21.11.14
+Processing Amnesia: Rebirth + Update 2
+Processing Among Trees – v0.5.27 (Release)
+Processing Anima: Gate of Memories v1.01
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Anima: Gate of Memories v1.01
+Processing Anno 2205: Gold Edition
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Anno 2205: Gold Edition
+Processing ANNO: Mutationem – Collectors Edition + Update 1 + DLC + Bonus Content
+Processing Arcana Heart 3: LOVE MAX!!!!!
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Arcana Heart 3: LOVE MAX!!!!!
+Processing ArcaniA: Gold Edition
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching ArcaniA: Gold Edition
+Processing Arcante: Definitive Edition
+Processing Archvale – v1.1.1
+Processing Arma 3: Ultimate Edition – v2.06.148470 + HotFix Build 7756264 + All DLCs + Multiplayer
+Processing Armikrog
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Armikrog
+Processing Armored Xpress
+Processing Arslan: The Warriors of Legend
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Arslan: The Warriors of Legend
+Processing art of rally: deluxe edition – v1.4.2a (Indonesia Update) + Bonus Content
+Processing Artist Life Simulator
+Processing Ary and the Secret of Seasons
+Processing As Dusk Falls + High Resolution Textures Pack DLC
+Processing As Far As The Eye – v1.0.0b
+Processing Ash of Gods: The Way – v1.05.12 + Bonus Content
+Processing Ashen
+Processing Ashes Cricket – v1.0548
+Processing Ashes of Oahu
+Processing Ashes of the Singularity
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Ashes of the Singularity
+Processing Ashes of the Singularity: Escalation – v3.10.191346 + 13 DLCs/Bonus Content
+Processing Ashwalkers – v1.0.0.1
+Processing Aspire: Ina's Tale – v1.0.16
+Processing Assassin's Creed 3: Remastered + Day 1 Patch + All DLCs + AC Liberation
+Processing Assassin's Creed Chronicles: Trilogy
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Assassin's Creed Chronicles: Trilogy
+Processing Assassin's Creed IV: Black Flag – Jackdaw Edition
+Processing Assassin's Creed: Origins – v1.5.1 + All DLCs
+Processing Assassin's Creed: Rogue
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Assassin's Creed: Rogue
+Processing Assassin's Creed: Unity – v1.5.0 + All DLCs
+Processing Assault Suit Leynos
+Processing Asterigos: Curse of the Stars – Ultimate Edition, v01.06.0000 + 2 DLCs + Bonus Content + Windows 7 Fix
+Processing Asterix & Obelix: Slap them All!
+Processing Astral Chain – v1.0.1 + Yuzu Emu for PC
+Processing Astray
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Astray
+Processing Astria Ascending
+Processing Atelier Firis: The Alchemist and the Mysterious Journey – v1.0.0.9 + 2 DLCs
+Processing Atelier Marie Remake: The Alchemist of Salburg – Digital Deluxe Edition + 4 DLCs/Bonuses
+Processing Atelier Ryza 3: Alchemist of the End & The Secret Key – Digital Deluxe Edition + 8 DLCs
+Processing Atelier Sophie 2: The Alchemist of the Mysterious Dream – Digital Deluxe Edition + 6 DLCs
+Processing Atomic Heart – DEV Debug Build (November 2022)
+Processing Atomicrops – v1.5.0f1 + 4 DLCs + Bonus
+Processing ATV Drift & Tricks + Multiplayer
+Processing AURUM
+Processing Automobilista – v1.5.26 + 8 DLCs
+Processing Avalom: Ancestral Heroes – v1.0.5
+Processing Avernus
+Processing Aztech Forgotten Gods
+Processing Backfirewall_
+Processing Bake ‘n Switch – v1.0.1 + Multiplayer
+Processing Baldur's Gate: Dark Alliance
+Processing Baldur's Gate: Enhanced Edition – Siege of Dragonspear
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Baldur's Gate: Enhanced Edition – Siege of Dragonspear
+Processing Bassmaster Fishing 2022 – v0.5.64041.0 + 7 DLCs
+Processing Batman: Arkham Knight
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Batman: Arkham Knight
+Processing Batman: Arkham Origins – The *REALLY* Complete Edition
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Batman: Arkham Origins – The *REALLY* Complete Edition
+Processing Battle Fantasia -Revised Edition-
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Battle Fantasia -Revised Edition-
+Processing Battlefield V – v1.04 build 3891220
+Processing Battlefield: Hardline
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Battlefield: Hardline
+Processing Battlefleet Gothic: Armada 2 – v8822
+Processing Battlefleet Gothic: Armada v1.5.8536 + Space Marines DLC
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Battlefleet Gothic: Armada v1.5.8536 + Space Marines DLC
+Processing Battlestar Galactica: Deadlock – v1.2.70 + 4 DLCs
+Processing BATTLETECH: Digital Deluxe Edition – v1.8.0 + All DLCs & Bonus Content
+Processing Battletoads – v1.0F.41427
+Processing Battlezone: Gold Edition – v1.08 + Multiplayer
+Processing Bayonetta
+Processing Bayonetta 2
+Processing Bayonetta 3 – v1.1.0 + Ryujinx Switch Emulator
+Processing BDSM: Big Drunk Satanic Massacre – v1.0.13 + 2 DLCs
+Processing Be a Rock + Windows 7 Fix
+Processing Beacon – v3.0
+Processing Beacon Pines: Collector's Edition – v1.0.2 + Bonus Content
+Processing Beam – v1.0.0r76s
+Processing Bear & Breakfast
+Processing Beautiful Desolation: Deluxe Edition – v1.0.7.3 + Bonus Content
+Processing Before We Leave – v1.0.328 (The Wasteland Update)
+Processing Beholder 3
+Processing Below – v1.1.0.79 (Explore Update)
+Processing Ben 10: Power Trip
+Processing Bendy and the Dark Revival – v1.0.0.0215
+Processing Beneath The Deep
+Processing Berserk and the Band of the Hawk + 6 DLCs
+Processing Besiege – v1.0_11012
+Processing Best Forklift Operator
+Processing Best Month Ever! – v1.0.0.013 + Bonus OST
+Processing Between Time: Escape Room
+Processing Beyond a Steel Sky: Aspiration Day Collection – v1.5.29158 + Bonus Content
+Processing Beyond Blue – v1.3.15659
+Processing Beyond Contact – v1.0.0 (Release)
+Processing Beyond Enemy Lines: Remastered Edition – v2.1.0
+Processing Beyond Mankind: The Awakening – v1.1.0
+Processing Beyond: Two Souls – Build 5117920 + Controller Fix + Letterbox Remover
+Processing Bibots
+Processing Big Byz Wars
+Processing Biker Garage: Mechanic Simulator – Anniversary Edition – v20211020 + 5 DLCs
+Processing BIOMUTANT – v1.3.0 + Mercenary Class DLC
+Processing Bionite: Origins
+Processing BioShock Infinite: The Complete Edition
+Processing BioShock Remastered – v1.0.122872
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "mirrors",
+      0,
+      "links",
+      1,
+      "link"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching BioShock Remastered – v1.0.122872
+Processing Biped – v1.1
+Processing Black Book: Deluxe Edition – BuildID 8229654 + 2 DLCs
+Processing Black Geyser: Couriers of Darkness – v1.2.45
+Processing Black Legend – v0.1.753
+Processing Black Mesa: Definitive Edition
+Processing Black Mirror – v1.0.0.1005 rev.8812
+Processing Black: The Fall
+Processing Blackguards 2
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Blackguards 2
+Processing BLACKTAIL – v1.3
+Processing Blackwind – v1.0.1.0
+Processing Blade Arcus from Shining: Battle Arena
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Blade Arcus from Shining: Battle Arena
+Processing Blade of Darkness – v67/Update 4 + Blade HD Mod V4
+Processing Blade of God – v1.0.2.8.2.1 + Lace Nightdress DLC
+Processing Blade Runner: Enhanced Edition
+Processing BLADESTORM: Nightmare
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching BLADESTORM: Nightmare
+Processing Blair Witch: Deluxe Edition – v08302019/Update 1
+Processing Blanc – ver. prd-195108 (Release)
+Processing BlazBlue: Central Fiction – v1.01
+Processing BlazBlue: Chronophantasma Extend
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching BlazBlue: Chronophantasma Extend
+Processing BlazBlue: Continuum Shift Extend
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching BlazBlue: Continuum Shift Extend
+Processing Blightbound – v1.1 (The Divine Rite) + 4 DLCs
+Processing Blightlands Blacksmith + Windows 7 Fix
+Processing Blind Fate: Edo no Yami – v1.0.1
+Processing Blizzard Arcade Collection
+Processing Blood & Zombies + 2 DLCs
+Processing Blood Bond: Into the Shroud (Enhanced Edition) – v7.0 + Comic Book
+Processing Blood Bowl 2: Legendary Edition – v3.0.120.2 + 9 DLCs
+Processing Blood Bowl 3: Brutal Edition – Build 43022 (11466878) + 6 DLCs
+Processing Blood Knights
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Blood Knights
+Processing Bloodbath Kavkaz
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Bloodbath Kavkaz
+Processing Bloodsports.TV
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Bloodsports.TV
+Processing Bloodstained: Ritual of the Night, v1.20 (01.14.2021, Classic Mode/Kingdom Crossover) + DLC
+Processing Bloody Spell – v1.0 + 17 DLCs + Server
+Processing Bloody Zombies
+Processing Blue Estate: The Game
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Blue Estate: The Game
+Processing Blue Fire – v5.0.5 + Void of Sorrows DLC + 2 Bonus OSTs + Windows 7 Fix
+Processing BLUE REFLECTION: Second Light, v1.02 + 24 DLCs
+Processing Blues & Bullets: Episode 1
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Blues & Bullets: Episode 1
+Processing Bombshell
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Bombshell
+Processing Bonetown: The Power of Death
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Bonetown: The Power of Death
+Processing Boomerang X – BuildID 7561562 (Endless Update)
+Processing Borderlands 2: Remastered + All DLCs
+Processing Borderlands 3: Ultimate Edition – Build 6500770 + 22 DLCs
+Processing Borderlands: Game of The Year Enhanced + Multiplayer
+Processing Borderlands: The Pre-Sequel – Remastered + 6 DLCs
+Processing Borderlands: The Pre-Sequel – v1.0.7 + 5 DLCs
+Processing Breach & Clear: Deadline
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Breach & Clear: Deadline
+Processing Brewmaster: Beer Brewing Simulator – v1.0.3.3
+Processing Bridge! 2: The Construction Game
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Bridge! 2: The Construction Game
+Processing Brigandine: The Legend of Runersia
+Processing Bright Memory: Infinite – Ultimate Edition – BuildID 10325320 + 9 DLCs + Bonus Content
+Processing Brinefall
+Processing Britannic: Patroness of the Mediterranean – v1.0.85
+Processing Broken Age: The Complete Adventure
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Broken Age: The Complete Adventure
+Processing Buccaneers!
+Processing Bullet Girls Phantasia + 26 DLCs
+Processing Buried Stars
+Processing CADE PRIME
+Processing Call of Duty: Black Ops 2 + 36 DLCs + MP with Bots + Zombie Mode
+Processing Call of Duty: Black Ops 3 – v100.0.0.0 + All DLCs
+Processing Call of Duty: Infinite Warfare – Digital Deluxe Edition
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "mirrors",
+      2,
+      "links",
+      0,
+      "link"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Call of Duty: Infinite Warfare – Digital Deluxe Edition
+Processing Call of Duty: Modern Warfare – Remastered + Update 2
+Processing Call of Duty: Modern Warfare 2 + 2 DLC
+Processing Call of Duty: Modern Warfare 2 – Campaign Remastered – v1.1.2.1279292
+Processing Call of Duty: Modern Warfare 3 – v1.9.461 + All DLCs
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "mirrors",
+      0,
+      "links",
+      1,
+      "link"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Call of Duty: Modern Warfare 3 – v1.9.461 + All DLCs
+Processing Call of Duty: WWII – Build 7831931 + All DLCs + Multiplayer + Zombies
+Processing Call of Duty: WWII – Multiplayer + Nazi Zombies Add-on
+Processing Call of the Sea: Deluxe Edition – v1.3.100 + Bonus Content
+Processing Call of the Wild: The Angler – Build 10138506 + 3 DLCs
+Processing Call to Arms: Gates of Hell – Ostfront – v1.016
+Processing Call to Arms: Ultimate Edition – v1.228.0 + All DLCs
+Processing Calluna
+Processing Candle
+Processing Candle Knight
+Processing Candy Disaster: Tower Defense – v2.0.9
+Processing Capcom Arcade Stadium: Packs 1, 2, and 3 (Contains 32 Games Total)
+Processing Capcom Fighting Collection + DLC + Multiplayer
+Processing Captain Tsubasa: Rise of New Champions – Deluxe Edition – v1.46.1 + 22 DLCs + Windows 7 Fix
+Processing Car Detailing Simulator – v1.000.27 + AMMO NYC DLC
+Processing Car Mechanic Simulator 2015: Gold Edition v1.0.5.6 + 4 DLCs
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Car Mechanic Simulator 2015: Gold Edition v1.0.5.6 + 4 DLCs
+Processing Car Mechanic Simulator 2018 – v1.6.8 + 19 DLCs
+Processing Car Mechanic Simulator 2021 – v1.0.30 + 14 DLCs
+Processing Card Shark – v1.0.2205311119 + Bonus Soundtrack
+Processing Cargo 3
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Cargo 3
+Processing Caribbean!
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Caribbean!
+Processing Carmageddon: Max Damage – The U.S. Election Nightmare Special Edition
+Processing Carmageddon: Reincarnation – Pubic Beta v0.9.0.6670
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Carmageddon: Reincarnation – Pubic Beta v0.9.0.6670
+Processing Carmageddon: Reincarnation v1.2.0.7673
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Carmageddon: Reincarnation v1.2.0.7673
+Processing Carnage Offering
+Processing Carnivores: Dinosaur Hunt
+Processing Carp Fishing Simulator – v2.2.5
+Processing Carrier Commander
+Processing CARRION – v1.0.3
+Processing Cartel Tycoon – v1.0.9.4763 + DLC + Bonus Content
+Processing Cartonfall: Fortress – v0.3.3/Release
+Processing Cassette Beasts: Deluxe Edition – v1.1.1 + DLC + Bonus Content
+Processing Cassiodora – v0.5.2364
+Processing Castle Flipper, v1.2
+Processing Castlevania: Lords of Shadow – Mirror of Fate HD – v1.0.684579
+Processing Castlevania: Lords of Shadow 2 – v1.0.0.1/Update 1 + 4 DLCs
+Processing Castlevania: Lords of Shadow – Ultimate Edition – v1.0.2.9/Update 2 + All DLCs
+Processing Catch the Head
+Processing Catherine Classic
+Processing Catie in MeowmeowLand
+Processing Catlateral Damage: Remeowstered – v1.0.2
+Processing Cats and the Other Lives – v1.0 Hotfix (Build 10000789)
+Processing Cats in Time – v1.4477.2/Update 1/Build 7260410
+Processing Catsperience
+Processing Centralia: Homecoming – v1.8
+Processing Champions of Anteria – v1.7.499537.X + All DLCs
+Processing CHAOS;CHILD
+Processing CHAOS;HEAD NOAH + COSTUME DLC
+Processing Charon's Staircase
+Processing Chasing Dead
+[ERROR]
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "genres"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "array",
+    "received": "undefined",
+    "path": [
+      "mirrors"
+    ],
+    "message": "Required"
+  }
+]
+    at Object.get error [as error] (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:43:31)
+    at ZodObject.parse (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/node_modules/.pnpm/zod@3.21.4/node_modules/zod/lib/types.js:141:22)
+    at /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:185:30
+    at step (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:44:23)
+    at Object.next (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:25:53)
+    at fulfilled (/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/src/index.ts:16:58)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+ while fetching Chasing Dead
+Processing Chasing Static
+Processing Chasm: The Rift – v1.0.0 + Original 1997 Version
