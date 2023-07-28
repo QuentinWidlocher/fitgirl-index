@@ -374,7 +374,7 @@ function storeGame(db: DatabaseType, parsedContent: ParsedContent) {
     try {
       parsedGameList.push(await getGame(game.link));
     } catch (e) {
-      log(e.stack + "\n while fetching " + game.title, true);
+      // log(e.stack + "\n while fetching " + game.title, true);
     }
   }
 

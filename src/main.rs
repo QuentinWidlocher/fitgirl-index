@@ -18,6 +18,7 @@ use rusqlite::params;
 use rusqlite::params_from_iter;
 use rusqlite::Connection;
 use serde::Deserialize;
+use serde::Serialize;
 use tower_http::services::ServeDir;
 use tower_livereload::predicate::Predicate;
 use tower_livereload::LiveReloadLayer;
@@ -57,7 +58,6 @@ fn layout(children: Markup) -> Markup {
     html! {
       (DOCTYPE)
         html {
-
           head {
             title { "FitGirl Index" }
             link rel="stylesheet" href="/assets/style.css" {}
@@ -124,11 +124,12 @@ fn release_card(item: &ReleaseCard) -> Markup {
     }
 }
 
-#[derive(Deserialize)]
+#[derive(Serialize, Deserialize)]
 struct Search {
     title: Option<String>,
     #[serde(default)]
     genres: Vec<String>,
+    page: Option<usize>,
 }
 
 async fn search(Query(query_params): Query<Search>) -> impl IntoResponse {
@@ -142,7 +143,7 @@ async fn search(Query(query_params): Query<Search>) -> impl IntoResponse {
     let mut where_clauses: Vec<&str> = vec![];
     let mut params: Vec<String> = vec![];
 
-    if let Some(title) = query_params.title {
+    if let Some(title) = &query_params.title {
         where_clauses.push("lower(r.title) LIKE ('%' || ? || '%')");
         params.push(title.to_lowercase());
     }
@@ -168,11 +169,23 @@ async fn search(Query(query_params): Query<Search>) -> impl IntoResponse {
         "
       GROUP BY r.id
       ORDER BY published DESC
-      LIMIT 20;
+      LIMIT 30
     ",
     );
 
-    println!("{}", query);
+    if let Some(page) = query_params.page {
+        query.push_str(format!(" OFFSET {}", (page - 1) * 30).as_str());
+    }
+
+    // println!("{}", query);
+
+    let query_params_next_page = Search {
+        title: query_params.title.clone(),
+        genres: query_params.genres.clone(),
+        page: Some(query_params.page.unwrap_or(1) + 1),
+    };
+
+    let query_params_next_page = serde_html_form::to_string(&query_params_next_page).unwrap();
 
     let mut statement = connection.prepare(query.as_str()).unwrap();
 
@@ -184,13 +197,18 @@ async fn search(Query(query_params): Query<Search>) -> impl IntoResponse {
                 cover_src: row.get(2)?,
             })
         })
-        .map(|row| row.filter_map(|item| item.ok()));
+        .map(|row| row.filter_map(|item| item.ok()).peekable());
 
-    if let Ok(list) = list {
-        html! {
-          @for item in list {
-            (release_card(&item))
-          }
+    if let Ok(mut list) = list {
+        if list.peek().is_none() {
+            html! {}
+        } else {
+            html! {
+              @for item in list {
+                (release_card(&item))
+              }
+              span hx-swap="outerHTML" hx-trigger="revealed" hx-get={ ( format!( "/search?{}", query_params_next_page ) ) } {}
+            }
         }
     } else {
         println!("Error: {:?}", list.err().unwrap());
@@ -207,7 +225,9 @@ async fn index() -> impl IntoResponse {
         .prepare("SELECT id, title, coverSrc FROM releases ORDER BY published DESC LIMIT 20")
         .unwrap();
 
-    let mut genres_stmt = connection.prepare("SELECT value FROM genres").unwrap();
+    let mut genres_stmt = connection
+        .prepare("SELECT value FROM genres ORDER BY value ASC")
+        .unwrap();
 
     let list = releases_stmt
         .query_map([], |row| {
@@ -226,51 +246,48 @@ async fn index() -> impl IntoResponse {
         .filter_map(|row| row.ok());
 
     html! {
-      main class="container mx-auto " {
-        h1 class="text-4xl my-5 text-center" {
-          "Latest Releases"
-        }
-
-            div ."grid grid-cols-[1fr_3fr] gap-10" {
-
-        form hx-get="/search-by-title" class="sticky top-10" hx-target="#result" {
-                div ."flex flex-col gap-5" {
-
-          label class="flex flex-col" {
-            span {
-              "Search by title"
+        main class="container mx-auto" {
+            h1 class="text-4xl my-5 pt-10 text-center" {
+                "FitGirl Repacks Index"
             }
-            input name="title" class="bg-gray-700 shadow-lg border border-transparent sfocus:border focus:border-red-500 focus:shadow-red-900/30 outline-none h-10 rounded px-3 py-2" { }
-          }
-          label class="flex flex-col" {
-            span {
-              "Genres"
-            }
-            select multiple name="genres" class="h-52 bg-gray-700 border border-transparent shadow-lg focus:border focus:border-red-500 focus:shadow-red-900/30 outline-none  rounded px-3 py-2"{
-              @for genre in genres {
-                option value={(genre)} {
-                  (genre)
+
+            div class="mx-5 grid grid-cols-1 grid-rows-[auto_1fr] h-full lg:grid-rows-1 lg:grid-cols-[1fr_3fr] gap-10" {
+                form hx-get="/search" hx-target="#result" {
+                    div class="flex flex-col gap-5" {
+                        label class="flex flex-col" {
+                            span {
+                                "Search by title"
+                            }
+                            input name="title" class="bg-gray-700 shadow-lg border border-transparent focus:border focus:border-red-500 focus:shadow-red-900/30 outline-none h-10 rounded px-3 py-2" {}
+                        }
+                        label class="flex flex-col" {
+                            span {
+                                "Genres"
+                            }
+                            select multiple name="genres" class="h-52 bg-gray-700 border border-transparent shadow-lg focus:border focus:border-red-500 focus:shadow-red-900/30 outline-none rounded px-3 py-2" {
+                                @for genre in genres {
+                                    option value={(genre)} {
+                                        (genre)
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    div class="flex gap-2 w-full mt-10" {
+                        button class="flex-1 hover:bg-red-500/30 border hover:shadow-lg hover:shadow-red-900/30 border-red-500 mt-auto text-red-100 rounded px-3 py-2" type="reset" { "Reset" }
+                        button class="flex-1 bg-red-500 hover:bg-red-600 hover:shadow-lg hover:shadow-red-900/30 mt-auto text-white rounded px-3 py-2" { "Search" }
+                    }
                 }
-              }
-            }
-          }
+
+                ul class="my-5 grid grid-cols-2 lg:grid-cols-5 gap-4 justify-center" id="result" {
+                    @for item in list {
+                        (release_card(&item))
+                    }
+                    span hx-swap="outerHTML" hx-trigger="revealed" hx-get="/search?page=2" {}
                 }
-          div class="flex gap-2 w-full mt-10" {
-            button class="flex-1 hover:bg-red-500/30 border hover:shadow-lg hover:shadow-red-900/30 border-red-500 mt-auto text-red-100 rounded px-3 py-2" type="reset" { "Reset" }
-            button class="flex-1 bg-red-500 hover:bg-red-600 hover:shadow-lg hover:shadow-red-900/30 mt-auto text-white rounded px-3 py-2" { "Search" }
-          }
-        }
-
-        ul class="my-5 grid grid-cols-5 gap-4 justify-center" id="result" {
-          @for item in list {
-            (release_card(&item))
-          }
-            span hx-trigger="revealed" hx-get="?page=2" {}
-        }
             }
-
-
-      }
+        }
     }
 }
 
@@ -307,46 +324,47 @@ async fn release(Path(id): Path<Uuid>) -> impl IntoResponse {
         .unwrap();
 
     html! {
-        div ."fixed top-0 left-0 m-10" {
-            a hx-boost="true" hx-swap="show:window:top transition:true" ."bg-gray-600 text-white rounded px-3 py-2" href="/" { "Back" }
+        div class="fixed top-0 left-0 m-10 z-10" {
+            // a hx-boost="true" hx-swap="show:window:top transition:true" class="bg-gray-600 text-white rounded-lg hover:bg-red-500 hover:shadow-lg hover:shadow-red-900/30 border-gray-800 border shadow-lg px-10 py-5 lg:px-3 lg:py-2" href="/" { "Back" }
+            button class="bg-gray-600 text-white rounded-lg hover:bg-red-500 hover:shadow-lg hover:shadow-red-900/30 border-gray-800 border shadow-lg px-10 py-5 lg:px-3 lg:py-2" onclick="window.history.back()" { "Back" }
         }
 
-        main ."container mt-10 pt-20 mx-auto grid grid-cols-[1fr_2fr] gap-5 " {
-            section ."flex flex-col gap-10 sticky top-0" {
-                img ."release-cover rounded-xl shadow-xl" src={(release.cover_src)} {}
-                ul ."grid grid-cols-3 gap-2" {
+        main class="container mt-10 pt-20 mx-auto grid grid-cols-1 grid-rows-[auto_1fr] lg:grid-rows-1 lg:grid-cols-[1fr_2fr] gap-5" {
+            section class="flex flex-col gap-10" {
+                img class="release-cover lg:rounded-xl shadow-xl" src={(release.cover_src)} {}
+                ul class="grid grid-cols-3 gap-2" {
                     @for screenshot in release.screenshots.into_iter().skip(1).collect::<Vec<String>>() {
                         li {
-                            img ."rounded shadow" src={(screenshot)} {}
+                            img class="rounded shadow" src={(screenshot)} {}
                         }
                     }
                 }
             }
-            section ."bg-gray-600 rounded-xl p-10" {
-                a ."hover:underline underline-offset-4" href={(release.link)} {
-                    h1 ."text-5xl font-bold release-title " { (release.title )}
+            section class="bg-gray-600 rounded-t-xl lg:rounded-b-xl p-10" {
+                a class="hover:underline underline-offset-4" href={(release.link)} {
+                    h1 class="text-5xl font-bold release-title" { (release.title) }
                 }
 
-                div ."flex gap-5 my-5" {
-                    div ."text-gray-300" { span { "Published : "} strong {(release.published.to_string())}}
-                    div ."text-gray-300" { span { "Original Size : "} strong {(release.original_size)}}
-                    div ."text-gray-300" { span { "Repack Size : "} strong {(release.repack_size)}}
+                div class="flex gap-5 my-5" {
+                    div class="text-gray-300" { span { "Published : " } strong { (release.published.to_string()) } }
+                    div class="text-gray-300" { span { "Original Size : " } strong { (release.original_size) } }
+                    div class="text-gray-300" { span { "Repack Size : " } strong { (release.repack_size) } }
                 }
-                ul ."flex flex-col gap-5 my-10" {
+                ul class="flex flex-col gap-5 my-10" {
                     @for mirror in release.mirrors {
                         li {
-                            ul ."flex gap-1" {
+                            ul class="flex gap-1" {
                                 @for link in mirror.links {
                                     li {
-                                        a ."bg-gray-500 hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/30 rounded-full px-3 py-2" href={( link.link )} { (link.name)}
+                                        a class="whitespace-nowrap bg-gray-500 hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/30 rounded-full px-3 py-2" href={(link.link)} { (link.name) }
                                     }
                                 }
                             }
                         }
                     }
                 }
-                p ."mt-5" { ( PreEscaped(release.repack_description ) )}
-                p ."mt-5" { ( PreEscaped(release.game_description ) )}
+                p class="mt-5" { (PreEscaped(release.repack_description)) }
+                p class="mt-5" { (PreEscaped(release.game_description)) }
             }
         }
     }
@@ -397,7 +415,7 @@ async fn main() {
         .route("/release/:id", get(release))
         .layer(LiveReloadLayer::new().request_predicate(HtmxBoostingPredicate))
         .layer(middleware::from_fn(htmx_boosting))
-        .route("/search-by-title", get(search));
+        .route("/search", get(search));
 
     axum::Server::bind(&"0.0.0.0:3000".parse().unwrap())
         .serve(app.into_make_service())

@@ -252,6 +252,7 @@ dependencies = [
  "maud",
  "rusqlite",
  "serde",
+ "serde_html_form",
  "serde_json",
  "tokio",
  "tower",
