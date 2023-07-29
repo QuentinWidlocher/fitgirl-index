@@ -1,0 +1,1 @@
+/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/netlify/functions/server/target/debug/fitgirl-scrapping: /Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/netlify/functions/server/src/main.rs

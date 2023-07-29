@@ -1,0 +1,8 @@
+/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/netlify/functions/hello-world/target/debug/deps/libfutures_macro-a1d86a09d087a9e4.dylib: /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.15/src/lib.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.15/src/executor.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.15/src/join.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.15/src/select.rs
+
+/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/netlify/functions/hello-world/target/debug/deps/futures_macro-a1d86a09d087a9e4.d: /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.15/src/lib.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.15/src/executor.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.15/src/join.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.15/src/select.rs
+
+/Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.15/src/lib.rs:
+/Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.15/src/executor.rs:
+/Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.15/src/join.rs:
+/Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.15/src/select.rs:

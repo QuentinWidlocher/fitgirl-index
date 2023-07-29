@@ -1,0 +1,10 @@
+/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/netlify/functions/server/target/release/deps/lock_api-618b7069c779b9d6.rmeta: /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lock_api-0.4.10/src/lib.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lock_api-0.4.10/src/mutex.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lock_api-0.4.10/src/remutex.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lock_api-0.4.10/src/rwlock.rs
+
+/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/netlify/functions/server/target/release/deps/liblock_api-618b7069c779b9d6.rlib: /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lock_api-0.4.10/src/lib.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lock_api-0.4.10/src/mutex.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lock_api-0.4.10/src/remutex.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lock_api-0.4.10/src/rwlock.rs
+
+/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/netlify/functions/server/target/release/deps/lock_api-618b7069c779b9d6.d: /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lock_api-0.4.10/src/lib.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lock_api-0.4.10/src/mutex.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lock_api-0.4.10/src/remutex.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lock_api-0.4.10/src/rwlock.rs
+
+/Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lock_api-0.4.10/src/lib.rs:
+/Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lock_api-0.4.10/src/mutex.rs:
+/Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lock_api-0.4.10/src/remutex.rs:
+/Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/lock_api-0.4.10/src/rwlock.rs:

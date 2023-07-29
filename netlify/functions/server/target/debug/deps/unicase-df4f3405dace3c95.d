@@ -1,0 +1,10 @@
+/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/netlify/functions/server/target/debug/deps/unicase-df4f3405dace3c95.rmeta: /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/unicase-2.6.0/src/lib.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/unicase-2.6.0/src/ascii.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/unicase-2.6.0/src/unicode/mod.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/unicase-2.6.0/src/unicode/map.rs
+
+/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/netlify/functions/server/target/debug/deps/libunicase-df4f3405dace3c95.rlib: /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/unicase-2.6.0/src/lib.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/unicase-2.6.0/src/ascii.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/unicase-2.6.0/src/unicode/mod.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/unicase-2.6.0/src/unicode/map.rs
+
+/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/netlify/functions/server/target/debug/deps/unicase-df4f3405dace3c95.d: /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/unicase-2.6.0/src/lib.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/unicase-2.6.0/src/ascii.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/unicase-2.6.0/src/unicode/mod.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/unicase-2.6.0/src/unicode/map.rs
+
+/Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/unicase-2.6.0/src/lib.rs:
+/Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/unicase-2.6.0/src/ascii.rs:
+/Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/unicase-2.6.0/src/unicode/mod.rs:
+/Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/unicase-2.6.0/src/unicode/map.rs:

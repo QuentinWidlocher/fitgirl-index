@@ -1,0 +1,10 @@
+/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/netlify/functions/server/target/release/deps/idna-eeb277d0e0c1ad2d.rmeta: /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/idna-0.4.0/src/lib.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/idna-0.4.0/src/punycode.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/idna-0.4.0/src/uts46.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/idna-0.4.0/src/uts46_mapping_table.rs
+
+/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/netlify/functions/server/target/release/deps/libidna-eeb277d0e0c1ad2d.rlib: /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/idna-0.4.0/src/lib.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/idna-0.4.0/src/punycode.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/idna-0.4.0/src/uts46.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/idna-0.4.0/src/uts46_mapping_table.rs
+
+/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/netlify/functions/server/target/release/deps/idna-eeb277d0e0c1ad2d.d: /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/idna-0.4.0/src/lib.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/idna-0.4.0/src/punycode.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/idna-0.4.0/src/uts46.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/idna-0.4.0/src/uts46_mapping_table.rs
+
+/Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/idna-0.4.0/src/lib.rs:
+/Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/idna-0.4.0/src/punycode.rs:
+/Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/idna-0.4.0/src/uts46.rs:
+/Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/idna-0.4.0/src/uts46_mapping_table.rs:
