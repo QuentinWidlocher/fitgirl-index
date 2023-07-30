@@ -1,9 +1,0 @@
-/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/netlify/functions/hello-world/target/debug/deps/query_map-0de737ac2916cfc1.rmeta: /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/query_map-0.6.0/src/lib.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/query_map-0.6.0/src/serde/mod.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/query_map-0.6.0/src/serde/aws_api_gateway_v2.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/query_map-0.6.0/src/serde/standard.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/query_map-0.6.0/src/url_query.rs
-
-/Users/quentinwidlocher/Documents/Perso/fitgirl-scrapping/netlify/functions/hello-world/target/debug/deps/query_map-0de737ac2916cfc1.d: /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/query_map-0.6.0/src/lib.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/query_map-0.6.0/src/serde/mod.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/query_map-0.6.0/src/serde/aws_api_gateway_v2.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/query_map-0.6.0/src/serde/standard.rs /Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/query_map-0.6.0/src/url_query.rs
-
-/Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/query_map-0.6.0/src/lib.rs:
-/Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/query_map-0.6.0/src/serde/mod.rs:
-/Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/query_map-0.6.0/src/serde/aws_api_gateway_v2.rs:
-/Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/query_map-0.6.0/src/serde/standard.rs:
-/Users/quentinwidlocher/.cargo/registry/src/index.crates.io-6f17d22bba15001f/query_map-0.6.0/src/url_query.rs:
