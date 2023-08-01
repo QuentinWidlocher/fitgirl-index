@@ -636,12 +636,12 @@ video {
   display: grid;
 }
 
-.h-10 {
-  height: 2.5rem;
+.aspect-\[3\/4\] {
+  aspect-ratio: 3/4;
 }
 
-.h-52 {
-  height: 13rem;
+.h-10 {
+  height: 2.5rem;
 }
 
 .h-full {
