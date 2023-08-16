@@ -3,6 +3,7 @@ use std::error::Error;
 use crate::components::release_card::ReleaseCard;
 
 use super::get_connection;
+use chrono::NaiveDateTime;
 use rusqlite::params_from_iter;
 use serde::Deserialize;
 use serde::Serialize;
@@ -19,7 +20,7 @@ pub fn search_db(params: SearchParams) -> Result<Vec<ReleaseCard>, Box<dyn Error
     let connection = get_connection();
 
     let mut query = "
-      SELECT r.id, r.title, r.coverSrc, r.id
+      SELECT r.id, r.title, r.coverSrc, r.published
       FROM releases r INNER JOIN release_genre rg ON r.id = rg.release_id"
         .to_owned();
 
@@ -68,6 +69,11 @@ pub fn search_db(params: SearchParams) -> Result<Vec<ReleaseCard>, Box<dyn Error
                 id: row.get(0)?,
                 title: row.get(1)?,
                 cover_src: row.get(2)?,
+                published: NaiveDateTime::parse_from_str(
+                    row.get::<usize, String>(3)?.as_str(),
+                    "%Y-%m-%dT%H:%M:%S.000Z",
+                )
+                .unwrap(),
             })
         })
         .map(|row| row.filter_map(|item| item.ok()).peekable())?

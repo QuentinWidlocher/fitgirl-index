@@ -274,7 +274,7 @@ function storeGame(db: DatabaseType, parsedContent: ParsedContent) {
 
 (async function main(): Promise<void> {
   // rmSync("fitgirl.db", { force: true });
-  const db = new Database("fitgirl.db");
+  const db = new Database("db/fitgirl.db");
   db.pragma("journal_mode = WAL");
 
   db.exec(`

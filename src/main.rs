@@ -4,6 +4,7 @@ use axum::response::IntoResponse;
 use axum::routing::get;
 use axum::Router;
 use axum_extra::extract::Query;
+use components::fullscreen_screenshot::fullscreen_screenshot;
 use components::generic_error::generic_error;
 use components::home_page::home_page;
 use db::genres::genres;
@@ -11,10 +12,17 @@ use db::last_releases::last_releases;
 use db::search::search_db;
 use db::search::SearchParams;
 
+use hyper::StatusCode;
 use maud::html;
 use services::htmx_boosting::htmx_boosting;
+
+use services::sync_fitgirl_rss::sync_fitgirl_rss;
 use tower_http::services::ServeDir;
+
+#[cfg(debug_assertions)]
 use tower_livereload::LiveReloadLayer;
+
+use tracing::error;
 use uuid::Uuid;
 
 use crate::components::release_card::release_card;
@@ -87,6 +95,18 @@ async fn release(Path(id): Path<Uuid>) -> impl IntoResponse {
     }
 }
 
+#[axum::debug_handler]
+async fn sync_db() -> impl IntoResponse {
+    match sync_fitgirl_rss().await {
+        Ok(titles) => (StatusCode::OK, titles.join("\n")),
+        Err(err) => {
+            println!("Error syncing db: {}", err);
+            error!("Error syncing db: {}", err);
+            (StatusCode::INTERNAL_SERVER_ERROR, err.to_string())
+        }
+    }
+}
+
 // fn prout(state: AppState) -> Result<String, Box<dyn Error>> {
 //     let connection = get_connection_safe(&state.db_path)?;
 //
@@ -130,7 +150,9 @@ async fn axum() -> shuttle_axum::ShuttleAxum {
             .route("/release/:id", get(release))
             .layer(middleware::from_fn(htmx_boosting))
             .layer(LiveReloadLayer::new())
-            .route("/search", get(search));
+            .route("/search", get(search))
+            .route("/fullscreen-screenshot", get(fullscreen_screenshot))
+            .route("/db/sync", get(sync_db));
 
         Ok(app.into())
     }
@@ -142,7 +164,9 @@ async fn axum() -> shuttle_axum::ShuttleAxum {
             .route("/", get(index))
             .route("/release/:id", get(release))
             .layer(middleware::from_fn(htmx_boosting))
-            .route("/search", get(search));
+            .route("/search", get(search))
+            .route("/fullscreen-screenshot", get(fullscreen_screenshot))
+            .route("/db/sync", get(sync_db));
         Ok(app.into())
     }
 }

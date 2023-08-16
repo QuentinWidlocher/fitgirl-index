@@ -1,6 +1,7 @@
 use chrono::NaiveDateTime;
+use derive_builder::Builder;
 use rusqlite::Connection;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 pub mod genres;
 pub mod last_releases;
@@ -13,21 +14,24 @@ const DB_PATH: &str = "db/fitgirl.db";
 #[cfg(not(debug_assertions))]
 const DB_PATH: &str = "opt/shuttle/shuttle-builds/fitgirl-index/db/fitgirl.db";
 
-fn get_connection() -> Connection {
+pub fn get_connection() -> Connection {
     Connection::open(DB_PATH).unwrap()
 }
 
-#[derive(Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Link {
     pub name: String,
     pub link: String,
 }
 
-#[derive(Deserialize)]
+#[derive(Default, Debug, Serialize, Deserialize, Clone)]
 pub struct Mirror {
     pub links: Vec<Link>,
 }
 
+#[derive(Builder, Debug)]
+#[builder(setter(into))]
+#[builder(derive(Debug))]
 pub struct Release {
     pub title: String,
     pub link: String,

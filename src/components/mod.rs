@@ -1,3 +1,4 @@
+pub mod fullscreen_screenshot;
 pub mod generic_error;
 pub mod home_page;
 pub mod layout;
