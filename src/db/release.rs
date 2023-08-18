@@ -3,14 +3,27 @@ use std::error::Error;
 use chrono::NaiveDateTime;
 use rusqlite::params;
 
-use super::{get_connection, Release};
+use super::{get_connection, Release, ReleaseWithInfo};
 
-pub fn get_release(id: String) -> Result<Release, Box<dyn Error>> {
+pub fn get_release(id: String) -> Result<ReleaseWithInfo, Box<dyn Error>> {
     let connection = get_connection();
 
-    let mut stmt = connection
-        .prepare("  SELECT title, coverSrc, link, published, originalSize, repackSize, mirrors, screenshots, repackDescription, gameDescription
-                    FROM releases WHERE id = ?")?;
+    let mut stmt = connection.prepare(
+        "  SELECT title,
+                           coverSrc,
+                           link,
+                           published,
+                           originalSize,
+                           repackSize,
+                           mirrors,
+                           screenshots,
+                           repackDescription,
+                           gameDescription
+                    FROM 
+                           releases
+                    WHERE id = ?
+        ",
+    )?;
 
     let release = stmt.query_row(params![id], |row| {
         Ok(Release {
@@ -32,5 +45,13 @@ pub fn get_release(id: String) -> Result<Release, Box<dyn Error>> {
         })
     })?;
 
-    Ok(release)
+    let mut stmt = connection.prepare(
+        "SELECT rg.genre FROM releases r INNER JOIN release_genre rg ON r.id = rg.release_id WHERE r.id = ? ",
+    )?;
+
+    let genres = stmt
+        .query_map([id], |row| row.get(0))?
+        .collect::<Result<Vec<String>, _>>()?;
+
+    Ok(ReleaseWithInfo { release, genres })
 }

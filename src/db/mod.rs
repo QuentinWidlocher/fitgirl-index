@@ -44,3 +44,8 @@ pub struct Release {
     pub repack_description: String,
     pub game_description: String,
 }
+
+pub struct ReleaseWithInfo {
+    pub release: Release,
+    pub genres: Vec<String>,
+}

@@ -2,9 +2,9 @@ use maud::html;
 use maud::Markup;
 use maud::PreEscaped;
 
-use crate::db::Release;
+use crate::db::ReleaseWithInfo;
 
-pub fn release_page(release: Release) -> Markup {
+pub fn release_page(ReleaseWithInfo { release, genres }: ReleaseWithInfo) -> Markup {
     let mut title = release.title.splitn(2, ['-', '–']);
 
     html! {
@@ -31,13 +31,25 @@ pub fn release_page(release: Release) -> Markup {
                     div class="text-gray-300" { span { "Original Size : " } strong { (release.original_size) } }
                     div class="text-gray-300" { span { "Repack Size : " } strong { (release.repack_size) } }
                 }
-                ul class="flex flex-col gap-5 my-10" {
-                    @for mirror in release.mirrors {
-                        li {
-                            ul class="flex gap-1" {
-                                @for link in mirror.links {
-                                    li {
-                                        a class="whitespace-nowrap bg-gray-500 hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/30 rounded-full px-3 py-2" href={(link.link)} { (link.name) }
+
+                ul class="flex gap-2 my-5" {
+                    @for genre in genres {
+                        li class="px-2 py-1 rounded bg-gray-500 whitespace-nowrap" {
+                            (genre)
+                        }
+                    }
+                }
+
+                details {
+                    summary { "Download Links" }
+                    ul class="flex flex-col gap-5 my-10" {
+                        @for mirror in release.mirrors {
+                            li {
+                                ul class="flex gap-1" {
+                                    @for link in mirror.links {
+                                        li {
+                                            a class="whitespace-nowrap bg-gray-500 hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/30 rounded-full px-3 py-2" href={(link.link)} { (link.name) }
+                                        }
                                     }
                                 }
                             }
