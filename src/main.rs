@@ -1,4 +1,7 @@
+use std::net::SocketAddr;
+
 use axum::extract::Path;
+use axum::http::HeaderMap;
 use axum::middleware;
 use axum::response::IntoResponse;
 use axum::routing::get;
@@ -7,6 +10,7 @@ use axum_extra::extract::Query;
 use components::fullscreen_screenshot::fullscreen_screenshot;
 use components::generic_error::generic_error;
 use components::home_page::home_page;
+use components::release_list::release_list;
 use db::genres::genres;
 use db::last_releases::last_releases;
 use db::search::search_db;
@@ -16,16 +20,13 @@ use hyper::StatusCode;
 use maud::html;
 use services::htmx_boosting::htmx_boosting;
 
+use services::sync_fitgirl_rss::sync_all_releases;
 use services::sync_fitgirl_rss::sync_fitgirl_rss;
 use tower_http::services::ServeDir;
-
-#[cfg(debug_assertions)]
-use tower_livereload::LiveReloadLayer;
 
 use tracing::error;
 use uuid::Uuid;
 
-use crate::components::release_card::release_card;
 use crate::components::release_page::release_page;
 use crate::db::release::get_release;
 
@@ -40,133 +41,134 @@ const ASSETS_PATH: &str = "assets";
 const ASSETS_PATH: &str = "opt/shuttle/shuttle-builds/fitgirl-index/assets";
 
 async fn search(Query(query_params): Query<SearchParams>) -> impl IntoResponse {
-    let query_params_next_page = SearchParams {
-        title: query_params.title.clone(),
-        genre: query_params.genre.clone(),
-        page: Some(query_params.page.unwrap_or(1) + 1),
-    };
+	let query_params_str = serde_html_form::to_string(&query_params).unwrap_or("".to_string());
 
-    let query_params_next_page =
-        serde_html_form::to_string(&query_params_next_page).unwrap_or("".to_string());
+	let mut headers = HeaderMap::new();
+	if let Ok(query_params_str_formatted) = format!("?{}", query_params_str).parse() {
+		headers.insert("hx-push-url", query_params_str_formatted);
+	}
 
-    let list = search_db(query_params);
+	let result = search_db(&query_params);
 
-    if let Ok(list) = list {
-        if list.is_empty() {
-            html! {}
-        } else {
-            html! {
-              @for item in list {
-                (release_card(&item))
-              }
-              span hx-swap="outerHTML" hx-trigger="revealed" hx-get={ ( format!( "/search?{}", query_params_next_page ) ) } {}
-            }
-        }
-    } else {
-        html! {}
-    }
+	let html = if let Ok((list, total)) = result {
+		if list.is_empty() {
+			html! {}
+		} else {
+			let show_next_page = (list.len() as i16) < total;
+			release_list(list.into_iter(), show_next_page, query_params)
+		}
+	} else {
+		html! {}
+	};
+
+	(headers, html)
 }
 
-async fn index() -> impl IntoResponse {
-    let list = last_releases();
-    let genres = genres();
+async fn index(Query(query_params): Query<SearchParams>) -> impl IntoResponse {
+	let result = if query_params.genre.is_some() || query_params.title.is_some() {
+		search_db(&query_params)
+	} else {
+		last_releases()
+	};
 
-    let list = match list {
-        Ok(list) => list,
-        Err(err) => return generic_error(err.to_string()),
-    };
+	let genres = genres();
 
-    let genres = match genres {
-        Ok(genres) => genres,
-        Err(err) => return generic_error(err.to_string()),
-    };
+	let (list, total) = match result {
+		Ok((list, total)) => (list, total),
+		Err(err) => return generic_error(err.to_string()),
+	};
 
-    home_page(list.into_iter(), genres.into_iter())
+	let genres = match genres {
+		Ok(genres) => genres,
+		Err(err) => return generic_error(err.to_string()),
+	};
+
+	let show_next_page = (list.len() as i16) < total;
+
+	home_page(
+		list.into_iter(),
+		genres.into_iter(),
+		show_next_page,
+		query_params,
+		total,
+	)
 }
 
 #[axum::debug_handler]
 async fn release(Path(id): Path<Uuid>) -> impl IntoResponse {
-    let release = get_release(id.to_string());
+	let release = get_release(id.to_string());
 
-    if let Ok(release) = release {
-        release_page(release)
-    } else {
-        generic_error("Release not found".to_string())
-    }
+	if let Ok(release) = release {
+		release_page(release)
+	} else {
+		generic_error("Release not found".to_string())
+	}
 }
 
 #[axum::debug_handler]
 async fn sync_db() -> impl IntoResponse {
-    match sync_fitgirl_rss().await {
-        Ok(titles) => (StatusCode::OK, titles.join("\n")),
-        Err(err) => {
-            println!("Error syncing db: {}", err);
-            error!("Error syncing db: {}", err);
-            (StatusCode::INTERNAL_SERVER_ERROR, err.to_string())
-        }
-    }
+	match sync_fitgirl_rss().await {
+		Ok(titles) => (StatusCode::OK, titles.join("\n")),
+		Err(err) => {
+			println!("Error syncing db: {}", err);
+			error!("Error syncing db: {}", err);
+			(StatusCode::INTERNAL_SERVER_ERROR, err.to_string())
+		}
+	}
 }
 
-// fn prout(state: AppState) -> Result<String, Box<dyn Error>> {
-//     let connection = get_connection_safe(&state.db_path)?;
-//
-//     let mut releases_stmt = connection
-//         .prepare("SELECT id, title, coverSrc FROM releases ORDER BY published DESC LIMIT 20")?;
-//
-//     let result = releases_stmt
-//         .query_map([], |row| row.get::<usize, String>(0))?
-//         .filter_map(|x| x.ok())
-//         .collect::<Vec<String>>()
-//         .join("\n");
-//
-//     Ok(result)
-//
-//     // let files: Result<Vec<_>, io::Error> =
-//     //     fs::read_dir("opt/shuttle/shuttle-builds/fitgirl-index/db")?
-//     //         .map(|res| res.map(|e| e.path()))
-//     //         .collect();
-//     //
-//     // Ok(files?
-//     //     .into_iter()
-//     //     .map(|x| x.to_str().unwrap_or("").to_string())
-//     //     .collect::<Vec<String>>()
-//     //     .join("\n"))
-// }
+#[axum::debug_handler]
+async fn sync_all_db() -> impl IntoResponse {
+	match sync_all_releases().await {
+		Ok(titles) => (StatusCode::OK, titles.join("\n")),
+		Err(err) => {
+			println!("Error syncing db: {}", err);
+			error!("Error syncing db: {}", err);
+			(StatusCode::INTERNAL_SERVER_ERROR, err.to_string())
+		}
+	}
+}
 
-// async fn test(State(state): State<AppState>) -> impl IntoResponse {
-//     match prout(state) {
-//         Ok(result) => result,
-//         Err(e) => e.to_string(),
-//     }
-// }
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+	let addr = SocketAddr::from(([127, 0, 0, 1], 8000));
+	println!("listening on {}", addr);
 
-#[shuttle_runtime::main]
-async fn axum() -> shuttle_axum::ShuttleAxum {
-    #[cfg(debug_assertions)]
-    {
-        let app = Router::new()
-            .nest_service("/assets", ServeDir::new(ASSETS_PATH))
-            .route("/", get(index))
-            .route("/release/:id", get(release))
-            .layer(middleware::from_fn(htmx_boosting))
-            .layer(LiveReloadLayer::new())
-            .route("/search", get(search))
-            .route("/fullscreen-screenshot", get(fullscreen_screenshot))
-            .route("/db/sync", get(sync_db));
+	#[cfg(debug_assertions)]
+	{
+		let app = Router::new()
+			.nest_service("/assets", ServeDir::new(ASSETS_PATH))
+			.route("/", get(index))
+			.route("/release/:id", get(release))
+			.layer(middleware::from_fn(htmx_boosting))
+			.route("/search", get(search))
+			.route("/fullscreen-screenshot", get(fullscreen_screenshot))
+			.route("/db/sync", get(sync_db))
+			.route("/db/sync_all", get(sync_all_db));
 
-        Ok(app.into())
-    }
+		axum::Server::bind(&addr)
+			.serve(app.into_make_service())
+			.await
+			.unwrap();
+	}
 
-    #[cfg(not(debug_assertions))]
-    {
-        let app = Router::new()
-            .nest_service("/assets", ServeDir::new(ASSETS_PATH))
-            .route("/", get(index))
-            .route("/release/:id", get(release))
-            .layer(middleware::from_fn(htmx_boosting))
-            .route("/search", get(search))
-            .route("/fullscreen-screenshot", get(fullscreen_screenshot))
-            .route("/db/sync", get(sync_db));
-        Ok(app.into())
-    }
+	#[cfg(not(debug_assertions))]
+	{
+		let app = Router::new()
+			.nest_service("/assets", ServeDir::new(ASSETS_PATH))
+			.route("/", get(index))
+			.route("/release/:id", get(release))
+			.layer(middleware::from_fn(htmx_boosting))
+			.route("/search", get(search))
+			.route("/fullscreen-screenshot", get(fullscreen_screenshot))
+			.route("/db/sync", get(sync_db))
+			.route("/db/sync_all", get(sync_all_db));
+
+		axum::Server::bind(&addr)
+			.serve(app.into_make_service())
+			.await
+			.unwrap();
+	}
+
+	Ok(())
 }
