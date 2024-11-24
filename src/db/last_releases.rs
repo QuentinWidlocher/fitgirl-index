@@ -1,59 +1,50 @@
 use std::error::Error;
 
 use chrono::NaiveDateTime;
-use rusqlite::Connection;
+use tokio_postgres::Client;
 
 use crate::components::release_card::ReleaseCard;
 
-use super::get_connection;
+use super::get_client;
 
-pub fn last_releases() -> Result<Vec<ReleaseCard>, Box<dyn Error>> {
-    let connection = get_connection();
+pub async fn last_releases() -> Result<(Vec<ReleaseCard>, i64), Box<dyn Error + Send + Sync>> {
+	let client = get_client().await;
 
-    let mut releases_stmt = connection.prepare(
-        "SELECT id, title, coverSrc, published FROM releases ORDER BY published DESC LIMIT 30",
-    )?;
+	let result = client
+		.query(
+			"SELECT id, title, coverSrc, published FROM releases ORDER BY published DESC LIMIT 30",
+			&[],
+		)
+		.await?
+		.iter()
+		.map(|row| ReleaseCard {
+			id: row.get(0),
+			title: row.get(1),
+			cover_src: row.get(2),
+			published: row.get::<usize, NaiveDateTime>(3),
+		})
+		.collect::<Vec<ReleaseCard>>();
 
-    let result = releases_stmt
-        .query_map([], |row| {
-            Ok(ReleaseCard {
-                id: row.get(0)?,
-                title: row.get(1)?,
-                cover_src: row.get(2)?,
-                published: NaiveDateTime::parse_from_str(
-                    row.get::<usize, String>(3)?.as_str(),
-                    "%Y-%m-%dT%H:%M:%S.000Z",
-                )
-                .unwrap(),
-            })
-        })?
-        .filter_map(|row| row.ok())
-        .collect::<Vec<ReleaseCard>>();
+	let count = client
+		.query_one("SELECT count(*) FROM releases", &[])
+		.await?
+		.get(0);
 
-    Ok(result)
+	Ok((result, count))
 }
 
-pub fn last_release(connection: &Connection) -> Result<ReleaseCard, Box<dyn Error>> {
-    let mut releases_stmt = connection.prepare(
-        "SELECT id, title, coverSrc, published FROM releases ORDER BY published DESC LIMIT 1",
-    )?;
+pub async fn last_release(client: Client) -> Result<ReleaseCard, Box<dyn Error + Send + Sync>> {
+	let row = client
+		.query_one(
+			"SELECT id, title, coverSrc, published FROM releases ORDER BY published DESC LIMIT 1",
+			&[],
+		)
+		.await?;
 
-    let result = releases_stmt
-        .query_map([], |row| {
-            Ok(ReleaseCard {
-                id: row.get(0)?,
-                title: row.get(1)?,
-                cover_src: row.get(2)?,
-                published: NaiveDateTime::parse_from_str(
-                    row.get::<usize, String>(3)?.as_str(),
-                    "%Y-%m-%dT%H:%M:%S.000Z",
-                )
-                .unwrap(),
-            })
-        })?
-        .filter_map(|row| row.ok())
-        .last()
-        .ok_or("No last release")?;
-
-    Ok(result)
+	Ok(ReleaseCard {
+		id: row.get(0),
+		title: row.get(1),
+		cover_src: row.get(2),
+		published: row.get::<usize, NaiveDateTime>(3),
+	})
 }

@@ -1,18 +1,15 @@
 use std::error::Error;
 
-use super::get_connection;
+use super::get_client;
 
-pub fn genres() -> Result<Vec<String>, Box<dyn Error>> {
-    let connection = get_connection();
+pub async fn genres() -> Result<Vec<String>, Box<dyn Error + Send + Sync>> {
+	let client = get_client().await;
 
-    let mut genres_stmt = connection
-        .prepare("SELECT value FROM genres ORDER BY value ASC")
-        .unwrap();
+	let rows = client
+		.query("SELECT value FROM genres ORDER BY value ASC", &[])
+		.await?;
 
-    let result = genres_stmt
-        .query_map([], |row| row.get::<_, String>(0))?
-        .filter_map(|row| row.ok())
-        .collect::<Vec<String>>();
+	let result = rows.iter().map(|row| row.get(0)).collect::<Vec<String>>();
 
-    Ok(result)
+	Ok(result)
 }

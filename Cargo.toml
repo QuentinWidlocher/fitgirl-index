@@ -1,28 +1,33 @@
 [package]
 name = "fitgirl-index"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 
 [dependencies]
-axum = { version = "0.6.18", features = ["form", "macros"] }
+aws_lambda_events = "0.7.3"
+axum = { version = "0.7", features = ["form", "macros", "query"] }
 axum-extra = { version = "0.7.5", features = ["query"] }
 chrono = "0.4.26"
-hyper = { version = "0.14.27", features = ["full"] }
-maud = { version = "0.25.0", features = ["axum"] }
-rusqlite = { version = "0.29.0", features = ["chrono"] }
-serde = { version = "1.0.171", features = ["derive"] }
-serde_html_form = "0.2.2"
-serde_json = "1.0.103"
-tokio = { version = "1.29.1", features = ["full"] }
-tower = { version = "0.4", features = ["util"] }
-tower-http = { version = "0.4.2", features = ["fs"] }
-tower-livereload = "0.8.0"
-uuid = { version = "1.4.1", features = ["serde"] }
-shuttle-axum = "0.21.0"
-shuttle-runtime = "0.21.0"
-shuttle-static-folder = "0.21.0"
-tracing = "0.1.37"
+derive_builder = "0.12.0"
+http = "1"
+hyper = { version = "1", features = ["full"] }
+log = "0.4.17"
+maud = { version = "0.26", features = ["axum"] }
 reqwest = "0.11.18"
 rss = "2.0.5"
 scraper = "0.17.1"
-derive_builder = "0.12.0"
+serde = { version = "1.0.171", features = ["derive"] }
+serde_html_form = "0.2.2"
+serde_json = "1.0.103"
+simple_logger = "1.16.0"
+tokio-postgres = { version = "0.7.12", features = ["with-chrono-0_4"] }
+tokio = { version = "1.29.1", features = ["full"] }
+tower = { version = "0.5", features = ["util"] }
+tower-http = { version = "0.6.2", features = ["fs", "cors", "trace"] }
+tower-livereload = "0.8.0"
+tracing = "0.1.37"
+uuid = { version = "1.11.0", features = ["serde", "v4"] }
+vercel_runtime = { version = "1.1.4" }
+dotenv = "0.15.0"
+postgres-openssl = "0.5.0"
+openssl = "0.10.68"
