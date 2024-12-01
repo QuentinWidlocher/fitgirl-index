@@ -21,7 +21,9 @@ pub fn home_page(
 							"FitGirl Repacks Index"
 						}
 						span class="text-gray-500 text-lg" {
-								"(" (total_games) " games)"
+								("(")
+								span id="count" { (total_games) }
+								(" games)")
 						}
 			}
 
@@ -61,7 +63,7 @@ pub fn home_page(
 				}
 
 				ul class="my-5 grid grid-cols-2 lg:grid-cols-5 gap-4 justify-center" id="result" {
-					(release_list(list, show_next_page, query_params))
+					(release_list(list, show_next_page, query_params, None))
 				}
 			}
 		}

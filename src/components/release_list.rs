@@ -10,6 +10,7 @@ pub fn release_list(
 	list: impl Iterator<Item = ReleaseCard>,
 	show_next_page: bool,
 	query_params: SearchParams,
+	total_games: Option<i64>,
 ) -> Markup {
 	let query_params_next_page = SearchParams {
 		title: query_params.title.clone(),
@@ -21,6 +22,9 @@ pub fn release_list(
 		serde_html_form::to_string(&query_params_next_page).unwrap_or("".to_string());
 
 	html! {
+		@if let Some(total_games) = total_games {
+			span hx-swap-oob="textContent:#count" { (total_games) }
+		}
 		@for item in list {
 			(release_card(&item))
 		}

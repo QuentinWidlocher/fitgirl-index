@@ -60,7 +60,7 @@ async fn search(Query(query_params): Query<SearchParams>) -> impl IntoResponse {
 			html! {}
 		} else {
 			let show_next_page = list.len() < total.try_into().unwrap();
-			release_list(list.into_iter(), show_next_page, query_params)
+			release_list(list.into_iter(), show_next_page, query_params, Some(total))
 		}
 	} else {
 		html! {}
