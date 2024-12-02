@@ -143,6 +143,11 @@ async fn sync_all_db() -> impl IntoResponse {
 	};
 }
 
+#[axum::debug_handler]
+async fn health_check() -> impl IntoResponse {
+	StatusCode::OK
+}
+
 pub fn get_router() -> Result<Router, Box<dyn Error + Send + Sync>> {
 	SimpleLogger::new()
 		.with_utc_timestamps()
@@ -164,6 +169,7 @@ pub fn get_router() -> Result<Router, Box<dyn Error + Send + Sync>> {
 		.route("/release/:id", get(release))
 		.layer(middleware::from_fn(htmx_boosting))
 		.route("/search", get(search))
+		.route("/health_check", get(health_check))
 		.route("/fullscreen-screenshot", get(fullscreen_screenshot))
 		.route("/db/sync", get(sync_db))
 		.route("/db/sync_all", get(sync_all_db))
