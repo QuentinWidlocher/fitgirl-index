@@ -49,6 +49,12 @@ async fn search(Query(query_params): Query<SearchParams>) -> impl IntoResponse {
 	let query_params_str = serde_html_form::to_string(&query_params).unwrap_or("".to_string());
 
 	let mut headers = HeaderMap::new();
+	headers.insert(
+		"Cache-Control",
+		"max-age=1800, s-maxage=3600, stale-while-revalidate=604800"
+			.parse()
+			.unwrap(),
+	);
 	if let Ok(query_params_str_formatted) = format!("?{}", query_params_str).parse() {
 		headers.insert("hx-push-url", query_params_str_formatted);
 	}
@@ -74,6 +80,12 @@ async fn index(Query(query_params): Query<SearchParams>) -> impl IntoResponse {
 	let query_params_str = serde_html_form::to_string(&query_params).unwrap_or("".to_string());
 
 	let mut headers = HeaderMap::new();
+	headers.insert(
+		"Cache-Control",
+		"max-age=1800, s-maxage=3600, stale-while-revalidate=604800"
+			.parse()
+			.unwrap(),
+	);
 
 	let genres = match genres().await {
 		Ok(genres) => genres,
@@ -110,12 +122,23 @@ async fn index(Query(query_params): Query<SearchParams>) -> impl IntoResponse {
 
 #[axum::debug_handler]
 async fn release(Path(id): Path<Uuid>) -> impl IntoResponse {
+	let mut headers = HeaderMap::new();
+	headers.insert(
+		"Cache-Control",
+		"max-age=86400, s-maxage=604800, stale-while-revalidate=2629746"
+			.parse()
+			.unwrap(),
+	);
+
 	let release = get_release(id.to_string()).await;
 
 	if let Ok(release) = release {
-		release_page(release)
+		(headers, release_page(release))
 	} else {
-		generic_error("Release not found".to_string()).into()
+		(
+			headers,
+			generic_error("Release not found".to_string()).into(),
+		)
 	}
 }
 
