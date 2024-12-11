@@ -1,0 +1,177 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import { db, Release, ReleaseGenres, eq } from "astro:db";
+import Layout from "../../layouts/Layout.astro";
+
+export const prerender = false; // that would be nice, but we need to dynamically update the list
+
+Astro.response.headers.set(
+    "CDN-Cache-Control",
+    "max-age=86400, s-maxage=604800, stale-while-revalidate=2629746",
+);
+Astro.response.headers.set(
+    "Cache-Control",
+    "max-age=86400, s-maxage=604800, stale-while-revalidate=2629746",
+);
+
+let [rawRelease] = await db.select().from(Release).where(eq(Release.slug, Astro.params.slug));
+
+const genres = await db
+    .select()
+    .from(ReleaseGenres)
+    .where(eq(ReleaseGenres.releaseId, rawRelease.id));
+
+const release = {
+    ...rawRelease,
+    mirrors: JSON.parse(rawRelease.mirrors as string) as {
+        links: { name: string; link: string }[];
+    }[],
+    screenshots: JSON.parse(rawRelease.screenshots as string) as string[],
+};
+---
+
+<Layout title={`${release.title} - FitGirl Index`}>
+    <button
+        class="fixed top-5 left-5 z-50 aspect-square w-7 h-7 bg-gray-500 rounded-full shadow-lg"
+        onclick="window.history.back()"
+    >
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-arrow-left mx-auto"
+            ><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg
+        >
+    </button>
+    <main
+        class="container mt-10 pt-20 mx-auto grid grid-cols-1 grid-rows-[auto_1fr] lg:grid-rows-1 lg:grid-cols-[1fr_2fr] gap-5"
+    >
+        <section class="flex flex-col gap-10">
+            <img
+                transition:name={`release-cover-${release.slug}`}
+                class="release-cover lg:rounded-xl shadow-xl"
+                src={release.coverSrc}
+            />
+            <ul class="grid grid-cols-3 gap-2">
+                {
+                    release.screenshots.slice(1, 7).map((screenshot, index) => (
+                        <li id={`screenshot_${index}`}>
+                            <img
+                                class="rounded shadow cursor-pointer"
+                                src={screenshot}
+                            />
+                        </li>
+                    ))
+                }
+                {
+                    release.screenshots[7] ? (
+                        <li id="screenshot_7" class="col-span-3">
+                            <img
+                                class="rounded shadow cursor-pointer w-full"
+                                src={release.screenshots[7]}
+                            />
+                        </li>
+                    ) : null
+                }
+            </ul>
+        </section>
+        <section class="bg-gray-600 rounded-t-xl lg:rounded-b-xl p-10">
+            <a class="hover:underline underline-offset-4" href={release.link}>
+                <h1
+                    class="text-5xl font-bold release-title"
+                    transition:name={`release-title-${release.slug}`}
+                >
+                    {release.title.split(/[-–,]/g).at(0)}
+                </h1>
+                <h2 class="text-xl ml-1 text-slate-400">
+                    {release.title.split(/[-–,]/g).slice(1)}
+                </h2>
+            </a>
+
+            <div class="flex gap-5 my-5">
+                <div class="text-gray-300">
+                    <span> Published : </span>
+                    <strong> {release.published.toLocaleDateString()} </strong>
+                </div>
+                <div class="text-gray-300">
+                    <span> Original Size : </span>
+                    <strong> {release.originalSize} </strong>
+                </div>
+                <div class="text-gray-300">
+                    <span> Repack Size : </span>
+                    <strong> {release.repackSize} </strong>
+                </div>
+            </div>
+
+            <ul class="flex gap-2 my-5">
+                {
+                    genres.map(({ genre }) => (
+                        <li>
+                            <a
+                                class="px-2 py-1 rounded bg-gray-500 hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/30 whitespace-nowrap"
+                                href={`/?genre=${genre}`}
+                            >
+                                {" "}
+                                {genre}{" "}
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
+
+            <ul class="flex flex-col gap-5 my-10">
+                {
+                    release.mirrors.map((mirror) => (
+                        <li>
+                            <ul class="flex gap-1">
+                                {mirror.links.map((link) => (
+                                    <li>
+                                        <a
+                                            class="whitespace-nowrap bg-gray-500 hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/30 rounded-full px-3 py-2"
+                                            href={link.link}
+                                        >
+                                            {" "}
+                                            {link.name}{" "}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </li>
+                    ))
+                }
+            </ul>
+            <p class="mt-5" set:html={release.repackDescription} />
+            <div class="mt-5 *:my-2" set:html={release.gameDescription} />
+        </section>
+    </main>
+</Layout>
+
+<script is:inline>
+    document.querySelectorAll("li[id^=screenshot]").forEach((el) => {
+        const screenshotUrl = el.querySelector("img").getAttribute("src");
+
+        el.addEventListener("click", () => {
+            const imgContainer = document.createElement("div");
+            imgContainer.className =
+                "cursor-pointer p-1 lg:p-20 z-20 fixed top-0 left-0 w-screen h-screen grid place-content-center bg-black/50";
+            imgContainer.addEventListener("click", (ev) => {
+                ev.stopPropagation();
+                imgContainer.remove();
+            });
+
+            const img = document.createElement("img");
+            img.className = "object-contain w-full h-full";
+            img.src = screenshotUrl.replace(".240p.jpg", "");
+
+            imgContainer.append(img);
+
+            el.append(imgContainer);
+        });
+    });
+</script>

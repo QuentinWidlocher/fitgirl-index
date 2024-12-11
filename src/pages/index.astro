@@ -1,11 +1,171 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import { db, Genre, like, desc, and } from "astro:db";
+import Layout from "../layouts/Layout.astro";
+import { Release } from "astro:db";
+import { count as countFn } from "astro:db";
+import { ReleaseGenres } from "astro:db";
+import { eq } from "astro:db";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+export const prerender = false;
+
+Astro.response.headers.set(
+    "CDN-Cache-Control",
+    "max-age=1800, s-maxage=3600, stale-while-revalidate=604800",
+);
+Astro.response.headers.set(
+    "Cache-Control",
+    "max-age=1800, s-maxage=3600, stale-while-revalidate=604800",
+);
+
+let page = parseInt(Astro.url.searchParams.get("p") || "1") - 1;
+let selectedGenre = Astro.url.searchParams.get("genre");
+let title = Astro.url.searchParams.get("title");
+
+const conditions = [];
+
+if (title) {
+    conditions.push(like(Release.title, `%${title.toLowerCase()}%`));
+}
+
+let query;
+if (selectedGenre) {
+    conditions.push(eq(ReleaseGenres.genre, selectedGenre));
+    query = db
+        .select()
+        .from(Release)
+        .innerJoin(ReleaseGenres, eq(Release.id, ReleaseGenres.releaseId))
+        .groupBy(Release.id)
+        .limit(100)
+        .offset(100 * page)
+        .where(and(...conditions))
+        .orderBy(desc(Release.published));
+} else {
+    query = db
+        .select()
+        .from(Release)
+        .limit(100)
+        .offset(100 * page)
+        .where(and(...conditions))
+        .orderBy(desc(Release.published));
+}
+
+const [[{ count }], genres] = await Promise.all([
+    db.select({ count: countFn() }).from(Release),
+    db.select().from(Genre).orderBy(Genre.name),
+]);
+
+const releasesPromise = query.then((releasesWithGenres) =>
+    releasesWithGenres.map((r) => ("Release" in r ? r.Release : r)),
+);
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="FitGirl Index">
+    <main class="container mx-auto">
+        <h1 class="my-5 pt-10 text-center flex flex-col">
+            <span class="text-4xl"> FitGirl Repacks Index </span>
+            <span class="text-gray-500 text-lg">
+                ({count} games)
+            </span>
+        </h1>
+
+        <div
+            class="mx-5 grid grid-cols-1 grid-rows-[auto_1fr] h-full lg:grid-rows-1 lg:grid-cols-[1fr_3fr] gap-10"
+        >
+            <form>
+                <div class="sticky top-10">
+                    <div class="flex flex-col gap-5">
+                        <label class="flex flex-col">
+                            <span> Search by title </span>
+                            <input
+                                name="title"
+                                class="bg-gray-700 shadow-lg border border-transparent focus:border focus:border-red-500 focus:shadow-red-900/30 outline-none h-10 rounded px-3 py-2"
+                            />
+                        </label>
+                        <label class="flex flex-col">
+                            <span> Genre </span>
+                            <select
+                                name="genre"
+                                class="bg-gray-700 border border-transparent shadow-lg focus:border focus:border-red-500 focus:shadow-red-900/30 outline-none rounded px-3 py-2"
+                            >
+                                {
+                                    genres.map((genre) => (
+                                        <option value={genre.name}>
+                                            {genre.name}
+                                        </option>
+                                    ))
+                                }
+                            </select>
+                        </label>
+
+                        <div class="flex gap-2 w-full mt-10">
+                            <button
+                                class="flex-1 hover:bg-red-500/30 border hover:shadow-lg hover:shadow-red-900/30 border-red-500 mt-auto text-red-100 rounded px-3 py-2"
+                                type="reset"
+                                onclick="setTimeout(() => this.form.submit())"
+                            >
+                                Reset
+                            </button>
+                            <button
+                                class="flex-1 bg-red-500 hover:bg-red-600 hover:shadow-lg hover:shadow-red-900/30 mt-auto text-white rounded px-3 py-2"
+                            >
+                                Search
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <ul
+                class="my-5 grid grid-cols-2 lg:grid-cols-5 gap-4 justify-center"
+            >
+                {
+                    releasesPromise.then((releases) =>
+                        releases.map((release) => (
+                            <li
+                                aria-name={release.title}
+                                class="relative group aspect-[3/4] shadow-lg hover:shadow-red-900/30"
+                            >
+                                <a
+                                    data-astro-prefetch
+                                    href={`release/${release.slug}`}
+                                >
+                                    <img
+                                        class="h-full w-full rounded-xl object-cover"
+                                        transition:name={`release-cover-${release.slug}`}
+                                        transition:animate="slide"
+                                        src={release.coverSrc}
+                                    />
+                                    <div class="absolute rounded-xl top-0 grid place-content-center gap-2 h-full w-full opacity-0 transition-opacity group-hover:opacity-100 text-white text-center bg-red-900/80 p-5">
+                                        <h2
+                                            class="font-bold"
+                                            transition:name={`release-title-${release.slug}`}
+                                        >
+                                            {release.title
+                                                .split(/[-–,]/g)
+                                                .at(0)}
+                                        </h2>
+                                        <span class="text-sm">
+                                            {" "}
+                                            {release.published.toLocaleDateString()}{" "}
+                                        </span>
+                                    </div>
+                                </a>
+                            </li>
+                        )),
+                    )
+                }
+            </ul>
+        </div>
+    </main>
 </Layout>
+
+<script is:inline define:vars={{ title, selectedGenre }}>
+    const form = document.querySelector("form");
+
+    const titleInput = document.querySelector("input[name=title]");
+    titleInput.value = title;
+    titleInput.addEventListener("change", () => form.submit());
+
+    const genreInput = document.querySelector("select[name=genre]");
+    genreInput.value = selectedGenre;
+    genreInput.addEventListener("change", () => form.submit());
+</script>
