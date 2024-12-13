@@ -50,7 +50,7 @@ const release = {
         >
     </button>
     <main
-        class="container mt-10 pt-20 mx-auto grid grid-cols-1 grid-rows-[auto_1fr] lg:grid-rows-1 lg:grid-cols-[1fr_2fr] gap-5"
+        class="container overflow-x-hidden mt-10 pt-20 mx-auto grid grid-cols-1 grid-rows-[auto_1fr] lg:grid-rows-1 lg:grid-cols-[1fr_2fr] gap-5"
     >
         <section class="flex flex-col gap-10">
             <img
@@ -109,7 +109,7 @@ const release = {
                 </div>
             </div>
 
-            <ul class="flex gap-2 my-5">
+            <ul class="flex gap-2 max-lg:-mx-10 max-lg:pl-10 overflow-x-auto p-5 pl-0 -my-3">
                 {
                     genres.map(({ genre }) => (
                         <li>
