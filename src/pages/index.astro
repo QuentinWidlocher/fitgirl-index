@@ -20,6 +20,7 @@ Astro.response.headers.set(
 
 let page = parseInt(Astro.url.searchParams.get("p") || "1") - 1;
 let selectedGenre = Astro.url.searchParams.get("genre");
+let pinkPaw = Astro.url.searchParams.has("pinkpaw");
 let title = Astro.url.searchParams.get("title");
 
 const [[{ count }], genres] = await Promise.all([
@@ -88,6 +89,7 @@ const [[{ count }], genres] = await Promise.all([
             <ReleaseList
                 server:defer
                 title={title}
+                pinkPaw={pinkPaw}
                 selectedGenre={selectedGenre}
                 page={page}
             >

@@ -1,10 +1,10 @@
-import { createWriteStream, rmSync, unlinkSync } from "fs";
-import { HTMLElement, parse as parseHTML } from "node-html-parser";
+import { parse as parseHTML } from "node-html-parser";
 import { z } from "zod";
-import { Company, db, desc, Genre, Language, Release, ReleaseGenres, ReleaseLanguages } from "astro:db";
+import { Company, db, desc, Genre, Language, like, not, or, Release, ReleaseGenres, ReleaseLanguages } from "astro:db";
 import slug from "slug";
 import { ReleaseCompanies } from "astro:db";
 import Parser from 'rss-parser';
+import { genreAliases } from "./_genreAliases";
 
 const base_url = "https://fitgirl-repacks.site/";
 
@@ -13,9 +13,10 @@ const parsedContentSchema = z.object({
   link: z.string(),
   published: z.date(),
   coverSrc: z.string(),
-  genres: z.array(z.string()),
-  companies: z.array(z.string()),
-  languages: z.array(z.string()),
+  genres: z.array(z.string()).optional().default([]),
+  companies: z.array(z.string()).optional().default([]),
+  pinkPaw: z.boolean().optional().default(false),
+  languages: z.array(z.string()).optional().default([]),
   originalSize: z.string(),
   repackSize: z.string(),
   mirrors: z.array(
@@ -23,8 +24,8 @@ const parsedContentSchema = z.object({
       name: z.string(),
       links: z.array(z.object({ name: z.string(), link: z.string() })),
     })
-  ),
-  screenshots: z.array(z.string()).optional(),
+  ).optional().default([]),
+  screenshots: z.array(z.string()).optional().default([]),
   repackDescription: z.string().optional(),
   gameDescription: z.string().optional(),
 });
@@ -94,6 +95,10 @@ async function getGame(url: string) {
 
   if (!content) {
     throw new Error("unable to parse html correctly");
+  }
+
+  if (content.querySelector('[style*=paw]') != null) {
+    parsedContent.pinkPaw = true
   }
 
   const date = root.querySelector('meta[property="article:published_time"]')?.attrs.content;
@@ -187,8 +192,8 @@ async function getGame(url: string) {
   };
 
   parsedContent.gameDescription = content
-    .querySelector("h3+ul+.su-spoiler .su-spoiler-content")
-    ?.innerHTML.trim();
+    .querySelectorAll(".su-spoiler").find(el => el.querySelector('.su-spoiler-title')?.innerText == "Game Description")
+    ?.querySelector(".su-spoiler-content")?.innerHTML.trim();
 
   return parsedContentSchema.parse(parsedContent);
 }
@@ -207,14 +212,9 @@ async function storeGame(parsedContent: ParsedContent) {
   }
 
   const [{ id: releaseId }] = await db.insert(Release).values({
+    ...parsedContent,
     id: crypto.randomUUID(),
     slug: slug(parsedContent.title),
-    title: parsedContent.title,
-    link: parsedContent.link,
-    published: parsedContent.published,
-    coverSrc: parsedContent.coverSrc,
-    originalSize: parsedContent.originalSize,
-    repackSize: parsedContent.repackSize,
     mirrors: JSON.stringify(parsedContent.mirrors),
     screenshots: JSON.stringify(parsedContent.screenshots ?? []),
     repackDescription: parsedContent.repackDescription ?? '',
@@ -243,6 +243,7 @@ export async function syncAll() {
   let fullGameList: Awaited<ReturnType<typeof getGameList>> = [];
   while (true) {
     const gameList = await getGameList(p++);
+    console.log("Scanned page", p)
 
     if (gameList.length == 0) {
       break;
@@ -253,18 +254,21 @@ export async function syncAll() {
 
   const filteredGameList = fullGameList.filter(({ title }) => !existingTitles.some(({ title: t }) => t == title));
 
+  console.log("Found", filteredGameList.length, "to add")
+
   let addedGames: string[] = []
 
   for (const game of filteredGameList) {
     try {
+      console.log(game.title)
       const release = await getGame(game.link)
-      console.log("parsed game", release.title)
+      console.log("☑️ parsed")
       await storeGame(release);
-      console.log("stored game", release.title)
+      console.log("☑️ stored")
       addedGames.push(release.title);
     } catch (e) {
       if (e instanceof Error) {
-        console.error(e.stack + "\n while fetching " + game.title, true);
+        console.error(e.stack + "\n while fetching " + game.title);
       }
     }
   }
@@ -281,13 +285,13 @@ export async function syncRss() {
   let addedGames: string[] = []
 
   for (const releaseToAdd of releases) {
-    console.log(releaseToAdd.title, lastReleaseTitle)
     if (releaseToAdd.title == lastReleaseTitle) break;
 
+    console.log(releaseToAdd.title)
     const release = await getGame(releaseToAdd.link)
-    console.log("parsed game", release.title)
+    console.log("☑️ parsed")
     await storeGame(release);
-    console.log("stored game", release.title)
+    console.log("☑️ stored")
     addedGames.push(release.title);
   }
 

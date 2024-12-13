@@ -44,6 +44,7 @@ const Release = defineTable({
   columns: {
     id: column.text({ primaryKey: true, unique: true }),
     slug: column.text({ unique: true }),
+    pinkPaw: column.boolean({ default: false }),
     title: column.text(),
     link: column.text(),
     published: column.date(),
