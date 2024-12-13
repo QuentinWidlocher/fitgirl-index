@@ -199,18 +199,6 @@ async function getGame(url: string) {
 }
 
 async function storeGame(parsedContent: ParsedContent) {
-  for (const lang of parsedContent.languages) {
-    await db.insert(Language).values({ name: lang }).onConflictDoNothing();
-  }
-
-  for (const company of parsedContent.companies) {
-    await db.insert(Company).values({ name: company }).onConflictDoNothing();
-  }
-
-  for (const genre of parsedContent.genres) {
-    await db.insert(Genre).values({ name: genre }).onConflictDoNothing();
-  }
-
   const [{ id: releaseId }] = await db.insert(Release).values({
     ...parsedContent,
     id: crypto.randomUUID(),
@@ -222,15 +210,31 @@ async function storeGame(parsedContent: ParsedContent) {
   }).returning({ id: Release.id });
 
   for (const language of parsedContent.languages) {
+    await db.insert(Language).values({ name: language }).onConflictDoNothing();
     await db.insert(ReleaseLanguages).values({ language, releaseId }).onConflictDoNothing();
   }
 
   for (const company of parsedContent.companies) {
+    await db.insert(Company).values({ name: company }).onConflictDoNothing();
     await db.insert(ReleaseCompanies).values({ company, releaseId }).onConflictDoNothing();
   }
 
+  const matchingGenres = await db
+    .select({ name: Genre.name, aliases: Genre.aliases })
+    .from(Genre)
+    .where(or(...parsedContent.genres.map(genre => like(Genre.aliases, `%|${genre}|%`))));
+
   for (const genre of parsedContent.genres) {
-    await db.insert(ReleaseGenres).values({ genre, releaseId }).onConflictDoNothing();
+    const matchingGenre = matchingGenres.find(g => g.aliases.includes(`|${genre}|`))
+    const aliases = genreAliases.find(a => a.includes(`|${genre}|`)) ?? `|${genre}|`
+
+    if (matchingGenre?.name) {
+      await db.insert(ReleaseGenres).values({ genre: matchingGenre.name, releaseId }).onConflictDoNothing();
+    } else {
+      const genreName = aliases.split('|')[1];
+      await db.insert(Genre).values({ name: genreName, aliases }).onConflictDoNothing();
+      await db.insert(ReleaseGenres).values({ genre: genreName, releaseId }).onConflictDoNothing();
+    }
   }
 }
 

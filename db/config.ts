@@ -2,13 +2,14 @@ import { column, defineDb, defineTable } from 'astro:db';
 
 const Company = defineTable({
   columns: {
-    name: column.text({ primaryKey: true, unique: true })
+    name: column.text({ primaryKey: true, unique: true }),
   }
 })
 
 const Genre = defineTable({
   columns: {
-    name: column.text({ primaryKey: true, unique: true })
+    name: column.text({ primaryKey: true, unique: true }),
+    aliases: column.text({ default: '' })
   }
 })
 
