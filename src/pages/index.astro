@@ -69,10 +69,10 @@ const releasesPromise = query.then((releasesWithGenres) =>
         </h1>
 
         <div
-            class="mx-5 grid grid-cols-1 grid-rows-[auto_1fr] h-full lg:grid-rows-1 lg:grid-cols-[1fr_3fr] gap-10"
+            class="mx-5 flex flex-col-reverse lg:grid h-full lg:grid-rows-1 lg:grid-cols-[1fr_3fr] gap-10"
         >
-            <form>
-                <div class="sticky top-10">
+            <form class="max-lg:fixed bg-gray-800 p-5 rounded-tr-xl bottom-0 z-10 lg:bottom-unset">
+                <div class="lg:sticky lg:top-10">
                     <div class="flex flex-col gap-5">
                         <label class="flex flex-col">
                             <span> Search by title </span>
