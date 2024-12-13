@@ -5,6 +5,7 @@ import { Release } from "astro:db";
 import { count as countFn } from "astro:db";
 import { ReleaseGenres } from "astro:db";
 import { eq } from "astro:db";
+import ReleaseList from "../components/ReleaseList.astro";
 
 export const prerender = false;
 
@@ -21,42 +22,10 @@ let page = parseInt(Astro.url.searchParams.get("p") || "1") - 1;
 let selectedGenre = Astro.url.searchParams.get("genre");
 let title = Astro.url.searchParams.get("title");
 
-const conditions = [];
-
-if (title) {
-    conditions.push(like(Release.title, `%${title.toLowerCase()}%`));
-}
-
-let query;
-if (selectedGenre) {
-    conditions.push(eq(ReleaseGenres.genre, selectedGenre));
-    query = db
-        .select()
-        .from(Release)
-        .innerJoin(ReleaseGenres, eq(Release.id, ReleaseGenres.releaseId))
-        .groupBy(Release.id)
-        .limit(100)
-        .offset(100 * page)
-        .where(and(...conditions))
-        .orderBy(desc(Release.published));
-} else {
-    query = db
-        .select()
-        .from(Release)
-        .limit(100)
-        .offset(100 * page)
-        .where(and(...conditions))
-        .orderBy(desc(Release.published));
-}
-
 const [[{ count }], genres] = await Promise.all([
     db.select({ count: countFn() }).from(Release),
     db.select().from(Genre).orderBy(Genre.name),
 ]);
-
-const releasesPromise = query.then((releasesWithGenres) =>
-    releasesWithGenres.map((r) => ("Release" in r ? r.Release : r)),
-);
 ---
 
 <Layout title="FitGirl Index">
@@ -71,7 +40,9 @@ const releasesPromise = query.then((releasesWithGenres) =>
         <div
             class="mx-5 flex flex-col-reverse lg:grid h-full lg:grid-rows-1 lg:grid-cols-[1fr_3fr] gap-10"
         >
-            <form class="max-lg:fixed bg-gray-800 p-5 rounded-tr-xl bottom-0 z-10 lg:bottom-unset">
+            <form
+                class="max-lg:fixed bg-gray-800 p-5 rounded-tr-xl bottom-0 z-10 lg:bottom-unset"
+            >
                 <div class="lg:sticky lg:top-10">
                     <div class="flex flex-col gap-5">
                         <label class="flex flex-col">
@@ -114,46 +85,25 @@ const releasesPromise = query.then((releasesWithGenres) =>
                     </div>
                 </div>
             </form>
-            <ul
-                class="my-5 grid grid-cols-2 lg:grid-cols-5 gap-4 justify-center"
+            <ReleaseList
+                server:defer
+                title={title}
+                selectedGenre={selectedGenre}
+                page={page}
             >
-                {
-                    releasesPromise.then((releases) =>
-                        releases.map((release) => (
-                            <li
-                                aria-name={release.title}
-                                class="relative group aspect-[3/4] shadow-lg hover:shadow-red-900/30"
-                            >
-                                <a
-                                    data-astro-prefetch
-                                    href={`release/${release.slug}`}
-                                >
-                                    <img
-                                        class="h-full w-full rounded-xl object-cover"
-                                        transition:name={`release-cover-${release.slug}`}
-                                        transition:animate="slide"
-                                        src={release.coverSrc}
-                                    />
-                                    <div class="absolute rounded-xl top-0 grid place-content-center gap-2 h-full w-full opacity-0 transition-opacity group-hover:opacity-100 text-white text-center bg-red-900/80 p-5">
-                                        <h2
-                                            class="font-bold"
-                                            transition:name={`release-title-${release.slug}`}
-                                        >
-                                            {release.title
-                                                .split(/[-–,]/g)
-                                                .at(0)}
-                                        </h2>
-                                        <span class="text-sm">
-                                            {" "}
-                                            {release.published.toLocaleDateString()}{" "}
-                                        </span>
-                                    </div>
-                                </a>
-                            </li>
-                        )),
-                    )
-                }
-            </ul>
+                <ul
+                    slot="fallback"
+                    class="my-5 grid grid-cols-2 lg:grid-cols-5 gap-4 justify-center"
+                >
+                    {
+                        new Array(100)
+                            .fill(undefined)
+                            .map(() => (
+                                <li class="h-full w-full rounded-xl bg-gray-700 animate-pulse relative group aspect-[3/4]" />
+                            ))
+                    }
+                </ul>
+            </ReleaseList>
         </div>
     </main>
 </Layout>

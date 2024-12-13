@@ -1,0 +1,73 @@
+---
+import { like, Release, ReleaseGenres, db, eq, and, desc } from "astro:db";
+
+type Props = {
+    title: string | null;
+    selectedGenre: string | null;
+    page?: number;
+};
+const { title, selectedGenre, page = 1 } = Astro.props;
+const conditions = [];
+
+if (title) {
+    conditions.push(like(Release.title, `%${title}%`));
+}
+
+let query;
+if (selectedGenre) {
+    conditions.push(eq(ReleaseGenres.genre, selectedGenre));
+    query = db
+        .select()
+        .from(Release)
+        .innerJoin(ReleaseGenres, eq(Release.id, ReleaseGenres.releaseId))
+        .groupBy(Release.id)
+        .limit(100)
+        .offset(100 * page)
+        .where(and(...conditions))
+        .orderBy(desc(Release.published));
+} else {
+    query = db
+        .select()
+        .from(Release)
+        .limit(100)
+        .offset(100 * page)
+        .where(and(...conditions))
+        .orderBy(desc(Release.published));
+}
+
+const releases = await query.then((releasesWithGenres) =>
+    releasesWithGenres.map((r) => ("Release" in r ? r.Release : r)),
+);
+---
+
+<ul class="my-5 grid grid-cols-2 lg:grid-cols-5 gap-4 justify-center">
+    {
+        releases.map((release) => (
+            <li
+                aria-name={release.title}
+                class="relative group aspect-[3/4] shadow-lg hover:shadow-red-900/30"
+            >
+                <a data-astro-prefetch href={`release/${release.slug}`}>
+                    <img
+                        class="h-full w-full rounded-xl object-cover"
+                        transition:name={`release-cover-${release.slug}`}
+                        transition:animate="slide"
+                        src={release.coverSrc}
+                    />
+                    <div class="absolute rounded-xl top-0 grid place-content-center gap-2 h-full w-full opacity-0 transition-opacity group-hover:opacity-100 text-white text-center bg-red-900/80 p-5">
+                        <h2
+                            class="font-bold"
+                            transition:name={`release-title-${release.slug}`}
+                        >
+                            {release.title.split(/[-–,]/g).at(0)}
+                        </h2>
+                        <span class="text-sm">
+                            {" "}
+                            {release.published.toLocaleDateString()}{" "}
+                        </span>
+                    </div>
+                </a>
+            </li>
+        ))
+    }
+</ul>
