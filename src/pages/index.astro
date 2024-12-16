@@ -83,29 +83,29 @@ const [[{ count }], genres] = await Promise.all([
                                 Search
                             </button>
                         </div>
+                        <div class="justify-between mt-5 hidden lg:flex">
+                            <a
+                                href="https://github.com/QuentinWidlocher/fitgirl-index"
+                                target="_blank"
+                                class="mt-auto text-gray-500 hover:underline underline-offset-2 text-sm"
+                                >See on GitHub</a
+                            >
+                            <a
+                                href="https://fitgirl-repacks.site/"
+                                target="_blank"
+                                class="mt-auto text-gray-500 hover:underline underline-offset-2 text-sm"
+                                >Powered by FitGirl</a
+                            >
+                        </div>
                     </div>
                 </div>
             </form>
             <ReleaseList
-                server:defer
                 title={title}
                 pinkPaw={pinkPaw}
                 selectedGenre={selectedGenre}
                 page={page}
-            >
-                <ul
-                    slot="fallback"
-                    class="my-5 grid grid-cols-2 lg:grid-cols-5 gap-4 justify-center"
-                >
-                    {
-                        new Array(100)
-                            .fill(undefined)
-                            .map(() => (
-                                <li class="h-full w-full rounded-xl bg-gray-700 animate-pulse relative group aspect-[3/4]" />
-                            ))
-                    }
-                </ul>
-            </ReleaseList>
+            />
         </div>
     </main>
 </Layout>

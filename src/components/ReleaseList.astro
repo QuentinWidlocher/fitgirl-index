@@ -45,7 +45,9 @@ const releases = await query.then((releasesWithGenres) =>
 );
 ---
 
-<ul class="my-5 grid grid-cols-2 lg:grid-cols-5 gap-4 justify-center">
+<ul
+    class="my-5 pb-[50vh] lg:pb-12 grid grid-cols-2 lg:grid-cols-5 gap-4 justify-center"
+>
     {
         releases.map((release) => (
             <li
@@ -53,8 +55,9 @@ const releases = await query.then((releasesWithGenres) =>
                 class="relative group aspect-[3/4] shadow-lg hover:shadow-red-900/30"
             >
                 <a data-astro-prefetch href={`release/${release.slug}`}>
+                    <div class="absolute rounded-xl -z-10 top-0 h-full w-full animate-pulse bg-gray-600" />
                     <img
-                        class="h-full w-full rounded-xl object-cover"
+                        class="h-full w-full rounded-xl object-cover text-white/0"
                         onerror='this.style.display = "none";this.nextElementSibling.classList.add("!opacity-100")'
                         transition:name={`release-cover-${release.slug}`}
                         transition:animate="slide"
