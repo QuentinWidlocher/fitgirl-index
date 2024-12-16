@@ -1,7 +1,8 @@
 ---
-import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import { db, Release, ReleaseGenres, eq } from "astro:db";
 import Layout from "../../layouts/Layout.astro";
+import { ReleaseLanguages } from "astro:db";
+import { ReleaseCompanies } from "astro:db";
 
 export const prerender = false; // that would be nice, but we need to dynamically update the list
 
@@ -19,10 +20,20 @@ let [rawRelease] = await db
     .from(Release)
     .where(eq(Release.slug, Astro.params.slug));
 
-const genres = await db
-    .select()
-    .from(ReleaseGenres)
-    .where(eq(ReleaseGenres.releaseId, rawRelease.id));
+const [genres, languages, companies] = await Promise.all([
+    db
+        .select()
+        .from(ReleaseGenres)
+        .where(eq(ReleaseGenres.releaseId, rawRelease.id)),
+    db
+        .select()
+        .from(ReleaseLanguages)
+        .where(eq(ReleaseLanguages.releaseId, rawRelease.id)),
+    db
+        .select()
+        .from(ReleaseCompanies)
+        .where(eq(ReleaseCompanies.releaseId, rawRelease.id)),
+]);
 
 const release = {
     ...rawRelease,
@@ -35,6 +46,7 @@ const release = {
 
 <Layout title={`${release.title} - FitGirl Index`}>
     <button
+        aria-label="Back"
         class="fixed top-5 left-5 z-50 aspect-square w-7 h-7 bg-gray-500 rounded-full shadow-lg"
         onclick="window.history.back()"
     >
@@ -60,6 +72,7 @@ const release = {
                 transition:name={`release-cover-${release.slug}`}
                 class="w-full lg:rounded-xl shadow-xl"
                 src={release.coverSrc}
+                alt={`Cover of ${release.title}`}
             />
 
             <ul class="grid grid-cols-3 gap-2">
@@ -70,6 +83,7 @@ const release = {
                                 class="rounded shadow cursor-pointer"
                                 onerror='this.style.display = "none"'
                                 src={screenshot}
+                                alt={`Screenshot ${index + 1} of ${release.title}`}
                             />
                         </li>
                     ))
@@ -81,6 +95,7 @@ const release = {
                                 class="rounded shadow cursor-pointer w-full"
                                 onerror='this.style.display = "none"'
                                 src={release.screenshots[7]}
+                                alt={`Screenshot 8 of ${release.title}`}
                             />
                         </li>
                     ) : null
@@ -131,7 +146,7 @@ const release = {
                 </a>
             </div>
 
-            <div class="flex gap-5 my-5">
+            <div class="flex gap-5 mt-5">
                 <div class="text-gray-300">
                     <span> Published : </span>
                     <strong> {release.published.toLocaleDateString()} </strong>
@@ -143,6 +158,24 @@ const release = {
                 <div class="text-gray-300">
                     <span> Repack Size : </span>
                     <strong> {release.repackSize} </strong>
+                </div>
+            </div>
+            <div class="flex gap-5 mt-2 mb-5">
+                <div class="text-gray-300">
+                    <span>
+                        {companies.length > 1 ? "Companies" : "Company"} :
+                    </span>
+                    <strong>
+                        {companies.map((c) => c.company).join(", ")}
+                    </strong>
+                </div>
+                <div class="text-gray-300">
+                    <span>
+                        {languages.length > 1 ? "Languages" : "Language"} :
+                    </span>
+                    <strong>
+                        {languages.map((l) => l.language).join("/")}
+                    </strong>
                 </div>
             </div>
 
@@ -185,7 +218,7 @@ const release = {
                     ))
                 }
             </ul>
-            <p class="mt-5" set:html={release.repackDescription} />
+            <ul class="mt-5" set:html={release.repackDescription} />
             <div class="mt-5 *:my-2" set:html={release.gameDescription} />
         </section>
     </main>
