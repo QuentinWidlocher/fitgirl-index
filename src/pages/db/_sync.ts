@@ -287,17 +287,28 @@ export async function syncRss() {
   const [{ title: lastReleaseTitle }] = await db.select({ title: Release.title }).from(Release).limit(1).orderBy(desc(Release.published))
 
   let addedGames: string[] = []
+  let errors: Error[] = []
 
   for (const releaseToAdd of releases) {
     if (releaseToAdd.title == lastReleaseTitle) break;
 
     console.log(releaseToAdd.title)
-    const release = await getGame(releaseToAdd.link)
-    console.log("☑️ parsed")
-    await storeGame(release);
-    console.log("☑️ stored")
-    addedGames.push(release.title);
+    try {
+      const release = await getGame(releaseToAdd.link)
+      console.log("☑️ parsed")
+      await storeGame(release);
+      console.log("☑️ stored")
+      addedGames.push(release.title);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        errors.push(e)
+      }
+    }
   }
 
-  return addedGames
+  if (errors.length) {
+    console.error(errors)
+  }
+
+  return [addedGames, errors]
 }
