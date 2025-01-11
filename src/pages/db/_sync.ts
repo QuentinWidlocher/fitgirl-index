@@ -199,7 +199,7 @@ async function getGame(url: string) {
 }
 
 async function storeGame(parsedContent: ParsedContent) {
-  const [{ id: releaseId }] = await db.insert(Release).values({
+  const valuesToStore = {
     ...parsedContent,
     id: crypto.randomUUID(),
     slug: slug(parsedContent.title),
@@ -207,7 +207,12 @@ async function storeGame(parsedContent: ParsedContent) {
     screenshots: JSON.stringify(parsedContent.screenshots ?? []),
     repackDescription: parsedContent.repackDescription ?? '',
     gameDescription: parsedContent.gameDescription ?? '',
-  }).returning({ id: Release.id });
+  } satisfies typeof Release.$inferInsert
+
+  const [{ id: releaseId }] = await db.insert(Release)
+    .values(valuesToStore)
+    .returning({ id: Release.id })
+    .onConflictDoUpdate({ target: Release.slug, set: valuesToStore });
 
   for (const language of parsedContent.languages) {
     await db.insert(Language).values({ name: language }).onConflictDoNothing();
