@@ -1,6 +1,6 @@
 import { parse as parseHTML } from "node-html-parser";
 import { z } from "zod";
-import { Company, db, desc, Genre, Language, like, not, or, Release, ReleaseGenres, ReleaseLanguages } from "astro:db";
+import { Company, db, desc, eq, Genre, Language, like, not, or, Release, ReleaseGenres, ReleaseLanguages } from "astro:db";
 import slug from "slug";
 import { ReleaseCompanies } from "astro:db";
 import Parser from 'rss-parser';
@@ -199,15 +199,38 @@ async function getGame(url: string) {
 }
 
 async function storeGame(parsedContent: ParsedContent) {
-  const [{ id: releaseId }] = await db.insert(Release).values({
+  const [, gameSlug] = /https:\/\/fitgirl-repacks\.site\/(.*)\//.exec(parsedContent.link) ?? [null, slug(parsedContent.title)]
+
+  const [existingRelease] = await db
+    .select({ id: Release.id })
+    .from(Release)
+    .where(or(eq(Release.slug, gameSlug), eq(Release.link, parsedContent.link)))
+
+  const valuesToStore = {
     ...parsedContent,
     id: crypto.randomUUID(),
-    slug: slug(parsedContent.title),
+    slug: gameSlug,
     mirrors: JSON.stringify(parsedContent.mirrors),
-    screenshots: JSON.stringify(parsedContent.screenshots ?? []),
+    screenshots: JSON.stringify(parsedContent.screenshots ?? ''),
     repackDescription: parsedContent.repackDescription ?? '',
     gameDescription: parsedContent.gameDescription ?? '',
-  }).returning({ id: Release.id });
+  } satisfies typeof Release.$inferInsert
+
+  let releaseId;
+
+  if (existingRelease != null) {
+    [{ id: releaseId }] = await db.update(Release)
+      .set({
+        ...valuesToStore,
+        id: existingRelease.id,
+      })
+      .where(eq(Release.id, existingRelease.id))
+      .returning({ id: Release.id })
+  } else {
+    [{ id: releaseId }] = await db.insert(Release)
+      .values(valuesToStore)
+      .returning({ id: Release.id })
+  }
 
   for (const language of parsedContent.languages) {
     await db.insert(Language).values({ name: language }).onConflictDoNothing();

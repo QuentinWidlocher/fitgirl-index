@@ -47,7 +47,7 @@ const Release = defineTable({
     slug: column.text({ unique: true }),
     pinkPaw: column.boolean({ default: false }),
     title: column.text(),
-    link: column.text(),
+    link: column.text({ unique: true }),
     published: column.date(),
     coverSrc: column.text(),
     originalSize: column.text(),
