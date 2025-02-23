@@ -1,9 +1,9 @@
-import { syncLatest, syncRss } from "./_sync";
+import { syncRss } from "./_sync";
 
 export const prerender = false;
 
 export async function GET() {
-  const [addedGames, errors] = await syncLatest();
+  const [addedGames, errors] = await syncRss();
   return new Response(
     addedGames.join('\n') + errors.map(e => e.toString()).join('\n'),
     {

@@ -303,6 +303,44 @@ export async function syncAll() {
   return addedGames
 }
 
+export async function syncLatest() {
+  const res = await fetch(base_url);
+  const html = await res.text();
+  const [{ link: lastReleaseUrl }] = await db.select({ link: Release.link }).from(Release).limit(1).orderBy(desc(Release.published))
+
+  const root = parseHTML(html);
+
+  console.log(root.text)
+
+  const latestUrls = [...root.querySelectorAll(".wplp_listposts a.thumbnail")].map(a => a.attributes["href"])
+
+  let addedGames: string[] = []
+  let errors: Error[] = []
+
+  for (const url of latestUrls) {
+    console.log(url)
+    if (url == lastReleaseUrl) break;
+
+    try {
+      const release = await getGame(url)
+      console.log("☑️ parsed")
+      await storeGame(release);
+      console.log("☑️ stored")
+      addedGames.push(release.title);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        errors.push(e)
+      }
+    }
+  }
+
+  if (errors.length) {
+    console.error(errors)
+  }
+
+  return [addedGames, errors]
+}
+
 export async function syncRss() {
   const parser: Parser<{}, { title: string, link: string, pubDate: string, 'content:encoded': string }> = new Parser();
   const feed = await parser.parseURL('https://fitgirl-repacks.site/feed/')
