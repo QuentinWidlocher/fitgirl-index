@@ -46,4 +46,4 @@ export const genreAliases = [
   "|Vehicular Combat|Vehicular combat|",
   "|Visual Novel|Visual novel|",
   "|Zombie|Zombies|",
-]
+];

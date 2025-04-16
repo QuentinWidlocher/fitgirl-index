@@ -13,6 +13,7 @@
     "@astrojs/db": "0.14.5",
     "@astrojs/netlify": "6.0.1",
     "@astrojs/tailwind": "5.1.4",
+    "@netlify/functions": "^3.0.4",
     "astro": "5.1.1",
     "node-html-parser": "^6.1.13",
     "prettier-plugin-astro": "^0.14.1",

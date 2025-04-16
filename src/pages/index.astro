@@ -6,17 +6,20 @@ import { count as countFn } from "astro:db";
 import { ReleaseGenres } from "astro:db";
 import { eq } from "astro:db";
 import ReleaseList from "../components/ReleaseList.astro";
+import { cacheTags } from "../cache-tags";
 
 export const prerender = false;
 
+// Manual invalidation (based on cache tag)
 Astro.response.headers.set(
     "CDN-Cache-Control",
-    "max-age=1800, s-maxage=3600, stale-while-revalidate=604800",
+    "max-age=31556952, s-maxage=31556952",
 );
 Astro.response.headers.set(
     "Cache-Control",
-    "max-age=1800, s-maxage=3600, stale-while-revalidate=604800",
+    "max-age=31556952, s-maxage=31556952",
 );
+Astro.response.headers.set("Cache-Tag", cacheTags.index);
 
 let page = parseInt(Astro.url.searchParams.get("p") || "1") - 1;
 let selectedGenre = Astro.url.searchParams.get("genre");

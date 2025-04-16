@@ -1,9 +1,22 @@
 import { parse as parseHTML } from "node-html-parser";
 import { z } from "zod";
-import { Company, db, desc, eq, Genre, Language, like, not, or, Release, ReleaseGenres, ReleaseLanguages } from "astro:db";
+import {
+  Company,
+  db,
+  desc,
+  eq,
+  Genre,
+  Language,
+  like,
+  not,
+  or,
+  Release,
+  ReleaseGenres,
+  ReleaseLanguages,
+} from "astro:db";
 import slug from "slug";
 import { ReleaseCompanies } from "astro:db";
-import Parser from 'rss-parser';
+import Parser from "rss-parser";
 import { genreAliases } from "./_genreAliases";
 
 const base_url = "https://fitgirl-repacks.site/";
@@ -19,12 +32,15 @@ const parsedContentSchema = z.object({
   languages: z.array(z.string()).optional().default([]),
   originalSize: z.string(),
   repackSize: z.string(),
-  mirrors: z.array(
-    z.object({
-      name: z.string(),
-      links: z.array(z.object({ name: z.string(), link: z.string() })),
-    })
-  ).optional().default([]),
+  mirrors: z
+    .array(
+      z.object({
+        name: z.string(),
+        links: z.array(z.object({ name: z.string(), link: z.string() })),
+      })
+    )
+    .optional()
+    .default([]),
   screenshots: z.array(z.string()).optional().default([]),
   repackDescription: z.string().optional(),
   gameDescription: z.string().optional(),
@@ -48,27 +64,30 @@ async function getGameList(page = 1) {
 
   const root = parseHTML(html);
 
-  const list = root.querySelector(".lcp_catlist")
+  const list = root.querySelector(".lcp_catlist");
 
-  if (!list) throw new Error("List is missing")
+  if (!list) throw new Error("List is missing");
 
-  return list.querySelectorAll("li")
+  return list
+    .querySelectorAll("li")
     .map((li) => {
       const a = li.querySelector("a");
       if (!a) return;
       const link = a.attrs.href;
       const title = decode(a.rawText);
       return { title, link };
-    }).filter(Boolean);
+    })
+    .filter(Boolean);
 }
 
 async function getGame(url: string) {
   const res = await fetch(url, {
     headers: {
       Accept: "text/html",
-      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
-      Referer: "https://fitgirl-repacks.site/all-my-repacks-a-z/"
-    }
+      "User-Agent":
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+      Referer: "https://fitgirl-repacks.site/all-my-repacks-a-z/",
+    },
   });
   const html = await res.text();
 
@@ -83,29 +102,31 @@ async function getGame(url: string) {
     const elements = [];
     let currentEl = header.nextElementSibling;
     while (currentEl) {
-
       elements.push(currentEl);
 
       currentEl = currentEl.nextElementSibling;
       if (!currentEl || currentEl.tagName === "STYLE") break;
     }
 
-    content = parseHTML("<div>" + elements.map(el => el.outerHTML).join("") + "</div>");
+    content = parseHTML(
+      "<div>" + elements.map((el) => el.outerHTML).join("") + "</div>"
+    );
   }
 
   if (!content) {
     throw new Error("unable to parse html correctly");
   }
 
-  if (content.querySelector('[style*=paw]') != null) {
-    parsedContent.pinkPaw = true
+  if (content.querySelector("[style*=paw]") != null) {
+    parsedContent.pinkPaw = true;
   }
 
-  const date = root.querySelector('meta[property="article:published_time"]')?.attrs.content;
+  const date = root.querySelector('meta[property="article:published_time"]')
+    ?.attrs.content;
   if (!date) throw new Error("Published time is missing");
   parsedContent.published = new Date(date);
 
-  const title = root.querySelector(".entry-title")?.rawText
+  const title = root.querySelector(".entry-title")?.rawText;
   if (!title) throw new Error("Title is missing");
 
   parsedContent.title = decode(title);
@@ -192,77 +213,114 @@ async function getGame(url: string) {
   };
 
   parsedContent.gameDescription = content
-    .querySelectorAll(".su-spoiler").find(el => el.querySelector('.su-spoiler-title')?.innerText == "Game Description")
-    ?.querySelector(".su-spoiler-content")?.innerHTML.trim();
+    .querySelectorAll(".su-spoiler")
+    .find(
+      (el) =>
+        el.querySelector(".su-spoiler-title")?.innerText == "Game Description"
+    )
+    ?.querySelector(".su-spoiler-content")
+    ?.innerHTML.trim();
 
   return parsedContentSchema.parse(parsedContent);
 }
 
 async function storeGame(parsedContent: ParsedContent) {
-  const [, gameSlug] = /https:\/\/fitgirl-repacks\.site\/(.*)\//.exec(parsedContent.link) ?? [null, slug(parsedContent.title)]
+  const [, gameSlug] = /https:\/\/fitgirl-repacks\.site\/(.*)\//.exec(
+    parsedContent.link
+  ) ?? [null, slug(parsedContent.title)];
 
   const [existingRelease] = await db
     .select({ id: Release.id })
     .from(Release)
-    .where(or(eq(Release.slug, gameSlug), eq(Release.link, parsedContent.link)))
+    .where(
+      or(eq(Release.slug, gameSlug), eq(Release.link, parsedContent.link))
+    );
 
   const valuesToStore = {
     ...parsedContent,
     id: crypto.randomUUID(),
     slug: gameSlug,
     mirrors: JSON.stringify(parsedContent.mirrors),
-    screenshots: JSON.stringify(parsedContent.screenshots ?? ''),
-    repackDescription: parsedContent.repackDescription ?? '',
-    gameDescription: parsedContent.gameDescription ?? '',
-  } satisfies typeof Release.$inferInsert
+    screenshots: JSON.stringify(parsedContent.screenshots ?? ""),
+    repackDescription: parsedContent.repackDescription ?? "",
+    gameDescription: parsedContent.gameDescription ?? "",
+  } satisfies typeof Release.$inferInsert;
 
   let releaseId;
 
   if (existingRelease != null) {
-    [{ id: releaseId }] = await db.update(Release)
+    [{ id: releaseId }] = await db
+      .update(Release)
       .set({
         ...valuesToStore,
         id: existingRelease.id,
       })
       .where(eq(Release.id, existingRelease.id))
-      .returning({ id: Release.id })
+      .returning({ id: Release.id });
   } else {
-    [{ id: releaseId }] = await db.insert(Release)
+    [{ id: releaseId }] = await db
+      .insert(Release)
       .values(valuesToStore)
-      .returning({ id: Release.id })
+      .returning({ id: Release.id });
   }
 
   for (const language of parsedContent.languages) {
     await db.insert(Language).values({ name: language }).onConflictDoNothing();
-    await db.insert(ReleaseLanguages).values({ language, releaseId }).onConflictDoNothing();
+    await db
+      .insert(ReleaseLanguages)
+      .values({ language, releaseId })
+      .onConflictDoNothing();
   }
 
   for (const company of parsedContent.companies) {
     await db.insert(Company).values({ name: company }).onConflictDoNothing();
-    await db.insert(ReleaseCompanies).values({ company, releaseId }).onConflictDoNothing();
+    await db
+      .insert(ReleaseCompanies)
+      .values({ company, releaseId })
+      .onConflictDoNothing();
   }
 
   const matchingGenres = await db
     .select({ name: Genre.name, aliases: Genre.aliases })
     .from(Genre)
-    .where(or(...parsedContent.genres.map(genre => like(Genre.aliases, `%|${genre}|%`))));
+    .where(
+      or(
+        ...parsedContent.genres.map((genre) =>
+          like(Genre.aliases, `%|${genre}|%`)
+        )
+      )
+    );
 
   for (const genre of parsedContent.genres) {
-    const matchingGenre = matchingGenres.find(g => g.aliases.includes(`|${genre}|`))
-    const aliases = genreAliases.find(a => a.includes(`|${genre}|`)) ?? `|${genre}|`
+    const matchingGenre = matchingGenres.find((g) =>
+      g.aliases.includes(`|${genre}|`)
+    );
+    const aliases =
+      genreAliases.find((a) => a.includes(`|${genre}|`)) ?? `|${genre}|`;
 
     if (matchingGenre?.name) {
-      await db.insert(ReleaseGenres).values({ genre: matchingGenre.name, releaseId }).onConflictDoNothing();
+      await db
+        .insert(ReleaseGenres)
+        .values({ genre: matchingGenre.name, releaseId })
+        .onConflictDoNothing();
     } else {
-      const genreName = aliases.split('|')[1];
-      await db.insert(Genre).values({ name: genreName, aliases }).onConflictDoNothing();
-      await db.insert(ReleaseGenres).values({ genre: genreName, releaseId }).onConflictDoNothing();
+      const genreName = aliases.split("|")[1];
+      await db
+        .insert(Genre)
+        .values({ name: genreName, aliases })
+        .onConflictDoNothing();
+      await db
+        .insert(ReleaseGenres)
+        .values({ genre: genreName, releaseId })
+        .onConflictDoNothing();
     }
   }
 }
 
 export async function syncAll() {
-  const existingTitles = await db.select({ title: Release.title }).from(Release);
+  const existingTitles = await db
+    .select({ title: Release.title })
+    .from(Release);
 
   console.log(`Found ${existingTitles.length} existing titles`);
 
@@ -270,7 +328,7 @@ export async function syncAll() {
   let fullGameList: Awaited<ReturnType<typeof getGameList>> = [];
   while (true) {
     const gameList = await getGameList(p++);
-    console.log("Scanned page", p)
+    console.log("Scanned page", p);
 
     if (gameList.length == 0) {
       break;
@@ -279,19 +337,21 @@ export async function syncAll() {
     fullGameList = [...fullGameList, ...gameList];
   }
 
-  const filteredGameList = fullGameList.filter(({ title }) => !existingTitles.some(({ title: t }) => t == title));
+  const filteredGameList = fullGameList.filter(
+    ({ title }) => !existingTitles.some(({ title: t }) => t == title)
+  );
 
-  console.log("Found", filteredGameList.length, "to add")
+  console.log("Found", filteredGameList.length, "to add");
 
-  let addedGames: string[] = []
+  let addedGames: string[] = [];
 
   for (const game of filteredGameList) {
     try {
-      console.log(game.title)
-      const release = await getGame(game.link)
-      console.log("☑️ parsed")
+      console.log(game.title);
+      const release = await getGame(game.link);
+      console.log("☑️ parsed");
       await storeGame(release);
-      console.log("☑️ stored")
+      console.log("☑️ stored");
       addedGames.push(release.title);
     } catch (e) {
       if (e instanceof Error) {
@@ -300,76 +360,89 @@ export async function syncAll() {
     }
   }
 
-  return addedGames
+  return addedGames;
 }
 
 export async function syncLatest() {
   const res = await fetch(base_url);
   const html = await res.text();
-  const [{ link: lastReleaseUrl }] = await db.select({ link: Release.link }).from(Release).limit(1).orderBy(desc(Release.published))
+  const [{ link: lastReleaseUrl }] = await db
+    .select({ link: Release.link })
+    .from(Release)
+    .limit(1)
+    .orderBy(desc(Release.published));
 
   const root = parseHTML(html);
 
-  console.log(root.text)
+  const latestUrls = [
+    ...root.querySelectorAll(".wplp_listposts a.thumbnail"),
+  ].map((a) => a.attributes["href"]);
 
-  const latestUrls = [...root.querySelectorAll(".wplp_listposts a.thumbnail")].map(a => a.attributes["href"])
-
-  let addedGames: string[] = []
-  let errors: Error[] = []
+  let addedGames: string[] = [];
+  let errors: Error[] = [];
 
   for (const url of latestUrls) {
-    console.log(url)
+    console.log(url);
     if (url == lastReleaseUrl) break;
 
     try {
-      const release = await getGame(url)
-      console.log("☑️ parsed")
+      const release = await getGame(url);
+      console.log("☑️ parsed");
       await storeGame(release);
-      console.log("☑️ stored")
+      console.log("☑️ stored");
       addedGames.push(release.title);
     } catch (e: unknown) {
       if (e instanceof Error) {
-        errors.push(e)
+        errors.push(e);
       }
     }
   }
 
   if (errors.length) {
-    console.error(errors)
+    console.error(errors);
   }
 
-  return [addedGames, errors]
+  return [addedGames, errors];
 }
 
 export async function syncRss() {
-  const parser: Parser<{}, { title: string, link: string, pubDate: string, 'content:encoded': string }> = new Parser();
-  const feed = await parser.parseURL('https://fitgirl-repacks.site/feed/')
-  const releases = feed.items.filter(x => x.categories?.includes('Lossless Repack'))
-  const [{ title: lastReleaseTitle }] = await db.select({ title: Release.title }).from(Release).limit(1).orderBy(desc(Release.published))
+  const parser: Parser<
+    {},
+    { title: string; link: string; pubDate: string; "content:encoded": string }
+  > = new Parser();
+  const feed = await parser.parseURL("https://fitgirl-repacks.site/feed/");
+  const releases = feed.items.filter((x) =>
+    x.categories?.includes("Lossless Repack")
+  );
+  const [{ title: lastReleaseTitle }] = await db
+    .select({ title: Release.title })
+    .from(Release)
+    .limit(1)
+    .orderBy(desc(Release.published));
 
-  let addedGames: string[] = []
-  let errors: Error[] = []
+  let addedGames: string[] = [];
+  let errors: Error[] = [];
 
   for (const releaseToAdd of releases) {
     if (releaseToAdd.title == lastReleaseTitle) break;
 
-    console.log(releaseToAdd.title)
+    console.log(releaseToAdd.title);
     try {
-      const release = await getGame(releaseToAdd.link)
-      console.log("☑️ parsed")
+      const release = await getGame(releaseToAdd.link);
+      console.log("☑️ parsed");
       await storeGame(release);
-      console.log("☑️ stored")
+      console.log("☑️ stored");
       addedGames.push(release.title);
     } catch (e: unknown) {
       if (e instanceof Error) {
-        errors.push(e)
+        errors.push(e);
       }
     }
   }
 
   if (errors.length) {
-    console.error(errors)
+    console.error(errors);
   }
 
-  return [addedGames, errors]
+  return [addedGames, errors];
 }
