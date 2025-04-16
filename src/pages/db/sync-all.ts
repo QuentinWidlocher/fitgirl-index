@@ -7,11 +7,13 @@ export const prerender = false;
 export async function GET() {
   const addedGames = await syncAll();
 
-  purgeCache({
-    tags: [cacheTags.index],
-  });
+  if (addedGames.length > 0) {
+    await purgeCache({
+      tags: [cacheTags.index, ...addedGames.map((g) => g.slug)],
+    });
+  }
 
-  return new Response(addedGames.join("\n"), {
+  return new Response(addedGames.map((g) => g.title).join("\n"), {
     headers: {
       "X-Total-Count": String(addedGames.length),
     },

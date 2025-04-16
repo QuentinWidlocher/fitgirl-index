@@ -7,14 +7,15 @@ export const prerender = false;
 export async function GET() {
   const [addedGames, errors] = await syncRss();
 
-  if (errors.length <= 0) {
-    purgeCache({
-      tags: [cacheTags.index],
+  if (addedGames.length > 0) {
+    await purgeCache({
+      tags: [cacheTags.index, ...addedGames.map((g) => g.slug)],
     });
   }
 
   return new Response(
-    addedGames.join("\n") + errors.map((e) => e.toString()).join("\n"),
+    addedGames.map((g) => g.title).join("\n") +
+    errors.map((e) => e.toString()).join("\n"),
     {
       headers: {
         "X-Total-Count": String(addedGames.length),

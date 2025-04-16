@@ -3,17 +3,23 @@ import { db, Release, ReleaseGenres, eq } from "astro:db";
 import Layout from "../../layouts/Layout.astro";
 import { ReleaseLanguages } from "astro:db";
 import { ReleaseCompanies } from "astro:db";
+import { cacheDuration } from "../../cache-tags";
 
 export const prerender = false; // that would be nice, but we need to dynamically update the list
 
+if (!Astro.params.slug) {
+    return Astro.redirect("/");
+}
+
 Astro.response.headers.set(
     "CDN-Cache-Control",
-    "max-age=86400, s-maxage=604800, stale-while-revalidate=2629746",
+    `max-age=${cacheDuration.halfDay}, s-maxage=${cacheDuration.oneYear}`,
 );
 Astro.response.headers.set(
     "Cache-Control",
-    "max-age=86400, s-maxage=604800, stale-while-revalidate=2629746",
+    `max-age=${cacheDuration.halfDay}, s-maxage=${cacheDuration.oneYear}`,
 );
+Astro.response.headers.set("Cache-Tag", Astro.params.slug);
 
 let [rawRelease] = await db
     .select()

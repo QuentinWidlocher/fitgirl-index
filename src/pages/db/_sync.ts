@@ -246,29 +246,26 @@ async function storeGame(parsedContent: ParsedContent) {
     gameDescription: parsedContent.gameDescription ?? "",
   } satisfies typeof Release.$inferInsert;
 
-  let releaseId;
+  let release: typeof Release.$inferSelect;
 
   if (existingRelease != null) {
-    [{ id: releaseId }] = await db
+    [release] = await db
       .update(Release)
       .set({
         ...valuesToStore,
         id: existingRelease.id,
       })
       .where(eq(Release.id, existingRelease.id))
-      .returning({ id: Release.id });
+      .returning();
   } else {
-    [{ id: releaseId }] = await db
-      .insert(Release)
-      .values(valuesToStore)
-      .returning({ id: Release.id });
+    [release] = await db.insert(Release).values(valuesToStore).returning();
   }
 
   for (const language of parsedContent.languages) {
     await db.insert(Language).values({ name: language }).onConflictDoNothing();
     await db
       .insert(ReleaseLanguages)
-      .values({ language, releaseId })
+      .values({ language, releaseId: release.id })
       .onConflictDoNothing();
   }
 
@@ -276,7 +273,7 @@ async function storeGame(parsedContent: ParsedContent) {
     await db.insert(Company).values({ name: company }).onConflictDoNothing();
     await db
       .insert(ReleaseCompanies)
-      .values({ company, releaseId })
+      .values({ company, releaseId: release.id })
       .onConflictDoNothing();
   }
 
@@ -301,7 +298,7 @@ async function storeGame(parsedContent: ParsedContent) {
     if (matchingGenre?.name) {
       await db
         .insert(ReleaseGenres)
-        .values({ genre: matchingGenre.name, releaseId })
+        .values({ genre: matchingGenre.name, releaseId: release.id })
         .onConflictDoNothing();
     } else {
       const genreName = aliases.split("|")[1];
@@ -311,10 +308,12 @@ async function storeGame(parsedContent: ParsedContent) {
         .onConflictDoNothing();
       await db
         .insert(ReleaseGenres)
-        .values({ genre: genreName, releaseId })
+        .values({ genre: genreName, releaseId: release.id })
         .onConflictDoNothing();
     }
   }
+
+  return release;
 }
 
 export async function syncAll() {
@@ -343,16 +342,16 @@ export async function syncAll() {
 
   console.log("Found", filteredGameList.length, "to add");
 
-  let addedGames: string[] = [];
+  let addedGames: (typeof Release.$inferSelect)[] = [];
 
   for (const game of filteredGameList) {
     try {
       console.log(game.title);
       const release = await getGame(game.link);
       console.log("☑️ parsed");
-      await storeGame(release);
+      const storedGame = await storeGame(release);
       console.log("☑️ stored");
-      addedGames.push(release.title);
+      addedGames.push(storedGame);
     } catch (e) {
       if (e instanceof Error) {
         console.error(e.stack + "\n while fetching " + game.title);
@@ -378,7 +377,7 @@ export async function syncLatest() {
     ...root.querySelectorAll(".wplp_listposts a.thumbnail"),
   ].map((a) => a.attributes["href"]);
 
-  let addedGames: string[] = [];
+  let addedGames: (typeof Release.$inferSelect)[] = [];
   let errors: Error[] = [];
 
   for (const url of latestUrls) {
@@ -388,9 +387,9 @@ export async function syncLatest() {
     try {
       const release = await getGame(url);
       console.log("☑️ parsed");
-      await storeGame(release);
+      const storedGame = await storeGame(release);
       console.log("☑️ stored");
-      addedGames.push(release.title);
+      addedGames.push(storedGame);
     } catch (e: unknown) {
       if (e instanceof Error) {
         errors.push(e);
@@ -402,7 +401,7 @@ export async function syncLatest() {
     console.error(errors);
   }
 
-  return [addedGames, errors];
+  return [addedGames, errors] as const;
 }
 
 export async function syncRss() {
@@ -420,7 +419,7 @@ export async function syncRss() {
     .limit(1)
     .orderBy(desc(Release.published));
 
-  let addedGames: string[] = [];
+  let addedGames: (typeof Release.$inferSelect)[] = [];
   let errors: Error[] = [];
 
   for (const releaseToAdd of releases) {
@@ -430,9 +429,9 @@ export async function syncRss() {
     try {
       const release = await getGame(releaseToAdd.link);
       console.log("☑️ parsed");
-      await storeGame(release);
+      const storedGame = await storeGame(release);
       console.log("☑️ stored");
-      addedGames.push(release.title);
+      addedGames.push(storedGame);
     } catch (e: unknown) {
       if (e instanceof Error) {
         errors.push(e);
@@ -444,5 +443,5 @@ export async function syncRss() {
     console.error(errors);
   }
 
-  return [addedGames, errors];
+  return [addedGames, errors] as const;
 }
