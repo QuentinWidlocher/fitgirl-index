@@ -13,13 +13,20 @@ const { title } = Astro.props;
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-        <link rel="icon" href="/favicon.ico" sizes="48x48">
-        <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml">
-        <link rel="manifest" href="/site.webmanifest">
-        <meta name="theme-color" content="#ef4444" media="(prefers-color-scheme: light)">
-        <meta name="theme-color" content="#ef4444" media="(prefers-color-scheme: dark)">
-        <ClientRouter />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" href="/favicon.ico" sizes="48x48" />
+        <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta
+            name="theme-color"
+            content="#ef4444"
+            media="(prefers-color-scheme: light)"
+        />
+        <meta
+            name="theme-color"
+            content="#ef4444"
+            media="(prefers-color-scheme: dark)"
+        />
     </head>
     <body class="bg-gray-800 text-white">
         <slot />

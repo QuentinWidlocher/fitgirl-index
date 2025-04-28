@@ -1,0 +1,17 @@
+---
+import ReleaseList from "../components/ReleaseList.astro";
+
+let page = parseInt(Astro.url.searchParams.get("p") || "1") - 1;
+let selectedGenre = Astro.url.searchParams.get("genre");
+let pinkPaw = Astro.url.searchParams.has("pinkpaw");
+let title = Astro.url.searchParams.get("title");
+
+export const partial = true;
+---
+
+<ReleaseList
+    title={title ?? undefined}
+    pinkPaw={pinkPaw}
+    selectedGenre={selectedGenre ?? undefined}
+    page={page}
+/>

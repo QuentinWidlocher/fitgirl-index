@@ -1,48 +1,35 @@
 ---
-import { like, Release, ReleaseGenres, db, eq, and, desc } from "astro:db";
+import { getList } from "../pages/db/_list";
 
 type Props = {
-    title: string | null;
-    selectedGenre: string | null;
-    pinkPaw: boolean | null;
-    page?: number;
+    title?: string;
+    selectedGenre?: string;
+    pinkPaw?: boolean;
+    page: number;
+    untilPage?: boolean;
 };
-const { title, selectedGenre, pinkPaw, page = 1 } = Astro.props;
-const conditions = [];
 
-if (title) {
-    conditions.push(like(Release.title, `%${title}%`));
-}
-
-if (pinkPaw) {
-    conditions.push(eq(Release.pinkPaw, true));
-}
-
-let query;
-if (selectedGenre) {
-    conditions.push(eq(ReleaseGenres.genre, selectedGenre));
-    query = db
-        .select()
-        .from(Release)
-        .innerJoin(ReleaseGenres, eq(Release.id, ReleaseGenres.releaseId))
-        .groupBy(Release.id)
-        .limit(100)
-        .offset(100 * page)
-        .where(and(...conditions))
-        .orderBy(desc(Release.published));
-} else {
-    query = db
-        .select()
-        .from(Release)
-        .limit(100)
-        .offset(100 * page)
-        .where(and(...conditions))
-        .orderBy(desc(Release.published));
-}
-
-const releases = await query.then((releasesWithGenres) =>
-    releasesWithGenres.map((r) => ("Release" in r ? r.Release : r)),
-);
+const releases = (
+    Astro.props.untilPage
+        ? await Promise.all(
+              [...Array(Astro.props.page + 1).keys()].flatMap((page) =>
+                  getList({
+                      title: Astro.props.title,
+                      selectedGenre: Astro.props.selectedGenre,
+                      pinkPaw: Astro.props.pinkPaw,
+                      page,
+                  }),
+              ),
+          )
+        : [
+              await getList({
+                  title: Astro.props.title,
+                  selectedGenre: Astro.props.selectedGenre,
+                  pinkPaw: Astro.props.pinkPaw,
+                  page: Astro.props.page,
+              }),
+          ]
+).flat();
 ---
 
 <ul
@@ -103,4 +90,5 @@ const releases = await query.then((releasesWithGenres) =>
             </li>
         ))
     }
+    <li id="end-of-list" class="block w-full h-10"></li>
 </ul>

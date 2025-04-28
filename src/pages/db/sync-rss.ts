@@ -9,7 +9,7 @@ export async function GET() {
 
   if (addedGames.length > 0) {
     await purgeCache({
-      tags: [cacheTags.index, ...addedGames.map((g) => g.slug)],
+      tags: [cacheTags.index, ...addedGames.map((g) => g.slug.replace(/[^a-z0-9]/gi, "_"))],
     });
   }
 

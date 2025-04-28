@@ -7,11 +7,12 @@ export const prerender = false;
 export async function GET() {
   const [addedGames, errors] = await syncLatest();
 
-  if (addedGames.length > 0) {
-    await purgeCache({
-      tags: [cacheTags.index, ...addedGames.map((g) => g.slug)],
-    });
-  }
+  await Promise.all(
+    [cacheTags.index, ...addedGames.map((g) => g.slug.replace(/[^a-z0-9]/gi, "_"))].map(tag => {
+      console.log("purge cache", tag)
+      return purgeCache({ tags: [tag] });
+    })
+  )
 
   return new Response(
     addedGames.map((g) => g.title).join("\n") +

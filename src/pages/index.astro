@@ -21,10 +21,12 @@ Astro.response.headers.set(
 );
 Astro.response.headers.set("Cache-Tag", cacheTags.index);
 
-let page = parseInt(Astro.url.searchParams.get("p") || "1") - 1;
+let page = (Number(Astro.url.searchParams.get("p")) || 1) - 1;
 let selectedGenre = Astro.url.searchParams.get("genre");
 let pinkPaw = Astro.url.searchParams.has("pinkpaw");
 let title = Astro.url.searchParams.get("title");
+
+console.debug("page", page);
 
 const [[{ count }], genres] = await Promise.all([
     db.select({ count: countFn() }).from(Release),
@@ -104,10 +106,11 @@ const [[{ count }], genres] = await Promise.all([
                 </div>
             </form>
             <ReleaseList
-                title={title}
+                title={title ?? undefined}
                 pinkPaw={pinkPaw}
-                selectedGenre={selectedGenre}
+                selectedGenre={selectedGenre ?? undefined}
                 page={page}
+                untilPage
             />
         </div>
     </main>
@@ -123,4 +126,40 @@ const [[{ count }], genres] = await Promise.all([
     const genreInput = document.querySelector("select[name=genre]");
     genreInput.value = selectedGenre;
     genreInput.addEventListener("change", () => form.submit());
+</script>
+
+<script>
+    const targetNode = document.getElementById("end-of-list")!;
+    const observer = new IntersectionObserver(async function ([
+        { isIntersecting },
+    ]) {
+        if (isIntersecting && window.scrollY > 0) {
+            const searchParams = new URL(location.href).searchParams;
+            searchParams.set(
+                "p",
+                String((Number(searchParams.get("p")) || 1) + 1),
+            );
+
+            const apiUrl = new URL(
+                "/list-fragment?" + searchParams.toString(),
+                location.origin,
+            );
+            const result = await fetch(apiUrl).then((res) => res.text());
+            var el = document.createElement("div");
+            el.innerHTML = result;
+            const releases = [
+                ...el.querySelectorAll("ul > li:not(#end-of-list)"),
+            ];
+            targetNode.before(...releases);
+            history.replaceState(
+                null,
+                "",
+                new URL("?" + searchParams.toString(), location.origin),
+            );
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", () =>
+        observer.observe(targetNode),
+    );
 </script>
