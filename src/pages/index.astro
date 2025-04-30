@@ -26,8 +26,6 @@ let selectedGenre = Astro.url.searchParams.get("genre");
 let pinkPaw = Astro.url.searchParams.has("pinkpaw");
 let title = Astro.url.searchParams.get("title");
 
-console.debug("page", page);
-
 const [[{ count }], genres] = await Promise.all([
     db.select({ count: countFn() }).from(Release),
     db.select().from(Genre).orderBy(Genre.name),
