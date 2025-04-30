@@ -45,8 +45,14 @@ const [[{ count }], genres] = await Promise.all([
             class="mx-5 flex flex-col-reverse lg:grid h-full lg:grid-rows-1 lg:grid-cols-[1fr_3fr] gap-10"
         >
             <form
-                class="max-lg:fixed bg-gray-800 p-5 rounded-tr-xl bottom-0 z-10 lg:bottom-unset"
+                class="max-lg:fixed bg-gray-800 p-5 w-full rounded-tr-xl right-0 bottom-0 translate-y-[--search-offset] z-10 lg:bottom-unset transition-transform"
             >
+                <button
+                    id="toggle-search"
+                    type="button"
+                    class="lg:hidden mb-5 w-full bg-red-500/30 active:bg-red-500/50 hover:bg-red-500/50 hover:shadow-lg hover:shadow-red-900/50 border-red-500 mt-auto text-red-100 rounded px-3 py-2"
+                    >Open search</button
+                >
                 <div class="lg:sticky lg:top-10">
                     <div class="flex flex-col gap-5">
                         <label class="flex flex-col">
@@ -160,4 +166,32 @@ const [[{ count }], genres] = await Promise.all([
     document.addEventListener("DOMContentLoaded", () =>
         observer.observe(targetNode),
     );
+</script>
+
+<script>
+    const btn = document.querySelector("button#toggle-search");
+    const searchBox = document.querySelector("form:has(button#toggle-search)");
+
+    if (btn && searchBox) {
+        searchBox.setAttribute(
+            "style",
+            "--search-offset: calc(100% - 42px - 20px - 20px)",
+        );
+        let searchOpened = false;
+
+        btn.addEventListener("click", (e) => {
+            searchOpened = !searchOpened;
+
+            if (searchOpened) {
+                searchBox.setAttribute("style", "--search-offset: unset");
+                btn.textContent = "Close search";
+            } else {
+                searchBox.setAttribute(
+                    "style",
+                    "--search-offset: calc(100% - 42px - 20px - 20px)",
+                );
+                btn.textContent = "Open search";
+            }
+        });
+    }
 </script>
