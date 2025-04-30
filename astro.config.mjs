@@ -1,5 +1,4 @@
-// @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 
 import netlify from '@astrojs/netlify';
 import tailwind from '@astrojs/tailwind';
@@ -10,5 +9,13 @@ export default defineConfig({
   adapter: netlify(),
   integrations: [tailwind(), db()],
   prefetch: true,
-  output: 'server'
+  output: 'server',
+  experimental: {
+    clientPrerender: true,
+    fonts: [{
+      provider: fontProviders.fontsource(),
+      name: "DM Sans",
+      cssVariable: "--font-default"
+    }]
+  }
 });
