@@ -10,21 +10,21 @@ import Searchable from "../layouts/Searchable.astro";
 
 export const prerender = false;
 
-// Manual invalidation (based on cache tag)
-Astro.response.headers.set(
-    "CDN-Cache-Control",
-    `max-age=${cacheDuration.halfDay}, s-maxage=${cacheDuration.oneYear}`,
-);
-Astro.response.headers.set(
-    "Cache-Control",
-    `max-age=${cacheDuration.halfDay}, s-maxage=${cacheDuration.oneYear}`,
-);
-Astro.response.headers.set("Cache-Tag", cacheTags.index);
+// // Manual invalidation (based on cache tag)
+// Astro.response.headers.set(
+//     "CDN-Cache-Control",
+//     `max-age=${cacheDuration.halfDay}, s-maxage=${cacheDuration.oneYear}`,
+// );
+// Astro.response.headers.set(
+//     "Cache-Control",
+//     `max-age=${cacheDuration.halfDay}, s-maxage=${cacheDuration.oneYear}`,
+// );
+// Astro.response.headers.set("Cache-Tag", cacheTags.index);
 
 let page = (Number(Astro.url.searchParams.get("p")) || 1) - 1;
 let selectedGenre = Astro.url.searchParams.get("genre");
-let pinkPaw = Astro.url.searchParams.has("pinkpaw");
 let title = Astro.url.searchParams.get("title");
+let pinkPaw = Astro.url.searchParams.has("pinkpaw");
 let bookmarked = Astro.url.searchParams.has("bookmarked");
 
 const bookmarks: string[] = Astro.cookies?.get("bookmarks")?.json() ?? [];

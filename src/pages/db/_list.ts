@@ -25,7 +25,7 @@ export async function getList({
     conditions.push(eq(Release.pinkPaw, true));
   }
 
-  if (slugs) {
+  if (slugs && slugs.length > 0) {
     conditions.push(inArray(Release.slug, slugs))
   }
 
