@@ -1,4 +1,4 @@
-import { like, Release, ReleaseGenres, db, eq, and, desc } from "astro:db";
+import { like, Release, ReleaseGenres, db, eq, and, desc, inArray } from "astro:db";
 
 const PAGE_SIZE = 100
 
@@ -7,11 +7,13 @@ export async function getList({
   pinkPaw,
   selectedGenre,
   page = 1,
+  slugs,
 }: {
   title?: string | null,
   pinkPaw?: boolean | null,
   selectedGenre?: string | null,
   page?: number,
+  slugs?: string[],
 }) {
   const conditions = [];
 
@@ -21,6 +23,10 @@ export async function getList({
 
   if (pinkPaw) {
     conditions.push(eq(Release.pinkPaw, true));
+  }
+
+  if (slugs) {
+    conditions.push(inArray(Release.slug, slugs))
   }
 
   let query;

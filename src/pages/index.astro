@@ -1,12 +1,12 @@
 ---
 import { db, Genre, like, desc, and } from "astro:db";
+import { getList } from "../pages/db/_list";
 import Layout from "../layouts/Layout.astro";
 import { Release } from "astro:db";
 import { count as countFn } from "astro:db";
-import { ReleaseGenres } from "astro:db";
-import { eq } from "astro:db";
 import ReleaseList from "../components/ReleaseList.astro";
 import { cacheDuration, cacheTags } from "../cache-tags";
+import Searchable from "../layouts/Searchable.astro";
 
 export const prerender = false;
 
@@ -25,112 +25,32 @@ let page = (Number(Astro.url.searchParams.get("p")) || 1) - 1;
 let selectedGenre = Astro.url.searchParams.get("genre");
 let pinkPaw = Astro.url.searchParams.has("pinkpaw");
 let title = Astro.url.searchParams.get("title");
+let bookmarked = Astro.url.searchParams.has("bookmarked");
 
-const [[{ count }], genres] = await Promise.all([
-    db.select({ count: countFn() }).from(Release),
-    db.select().from(Genre).orderBy(Genre.name),
-]);
+const bookmarks: string[] = Astro.cookies?.get("bookmarks")?.json() ?? [];
+
+let releases = (
+    await Promise.all(
+        [...Array(page + 1).keys()].flatMap((page) =>
+            getList({
+                title,
+                selectedGenre,
+                pinkPaw,
+                page,
+                slugs: bookmarked ? bookmarks : undefined,
+            }),
+        ),
+    )
+)
+    .flat()
+    .map((r) => ({ ...r, bookmarked: bookmarks.includes(r.slug) }));
 ---
 
 <Layout title="FitGirl Index">
-    <main class="container mx-auto">
-        <h1 class="my-5 pt-10 text-center flex flex-col">
-            <span class="text-4xl"> FitGirl Repacks Index </span>
-            <span class="text-gray-500 text-lg">
-                ({count} games)
-            </span>
-        </h1>
-
-        <div
-            class="mx-5 flex flex-col-reverse lg:grid h-full lg:grid-rows-1 lg:grid-cols-[1fr_3fr] gap-10"
-        >
-            <form
-                class="max-lg:fixed bg-gray-800 p-5 w-full rounded-tr-xl right-0 bottom-0 translate-y-[--search-offset] z-10 lg:bottom-unset transition-transform"
-            >
-                <button
-                    id="toggle-search"
-                    type="button"
-                    class="lg:hidden mb-5 w-full bg-red-500/30 active:bg-red-500/50 hover:bg-red-500/50 hover:shadow-lg hover:shadow-red-900/50 border-red-500 mt-auto text-red-100 rounded px-3 py-2"
-                    >Open search</button
-                >
-                <div class="lg:sticky lg:top-10">
-                    <div class="flex flex-col gap-5">
-                        <label class="flex flex-col">
-                            <span> Search by title </span>
-                            <input
-                                name="title"
-                                class="bg-gray-700 shadow-lg border border-transparent focus:border focus:border-red-500 focus:shadow-red-900/30 outline-none h-10 rounded px-3 py-2"
-                            />
-                        </label>
-                        <label class="flex flex-col">
-                            <span> Genre </span>
-                            <select
-                                name="genre"
-                                class="bg-gray-700 border border-transparent shadow-lg focus:border focus:border-red-500 focus:shadow-red-900/30 outline-none rounded px-3 py-2"
-                            >
-                                {
-                                    genres.map((genre) => (
-                                        <option value={genre.name}>
-                                            {genre.name}
-                                        </option>
-                                    ))
-                                }
-                            </select>
-                        </label>
-
-                        <div class="flex gap-2 w-full mt-10">
-                            <button
-                                class="flex-1 hover:bg-red-500/30 border hover:shadow-lg hover:shadow-red-900/30 border-red-500 mt-auto text-red-100 rounded px-3 py-2"
-                                type="reset"
-                                onclick="setTimeout(() => this.form.submit())"
-                            >
-                                Reset
-                            </button>
-                            <button
-                                class="flex-1 bg-red-500 hover:bg-red-600 hover:shadow-lg hover:shadow-red-900/30 mt-auto text-white rounded px-3 py-2"
-                            >
-                                Search
-                            </button>
-                        </div>
-                        <div class="justify-between mt-5 hidden lg:flex">
-                            <a
-                                href="https://github.com/QuentinWidlocher/fitgirl-index"
-                                target="_blank"
-                                class="mt-auto text-gray-500 hover:underline underline-offset-2 text-sm"
-                                >See on GitHub</a
-                            >
-                            <a
-                                href="https://fitgirl-repacks.site/"
-                                target="_blank"
-                                class="mt-auto text-gray-500 hover:underline underline-offset-2 text-sm"
-                                >Powered by FitGirl</a
-                            >
-                        </div>
-                    </div>
-                </div>
-            </form>
-            <ReleaseList
-                title={title ?? undefined}
-                pinkPaw={pinkPaw}
-                selectedGenre={selectedGenre ?? undefined}
-                page={page}
-                untilPage
-            />
-        </div>
-    </main>
+    <Searchable>
+        <ReleaseList releases={releases} />
+    </Searchable>
 </Layout>
-
-<script is:inline define:vars={{ title, selectedGenre }}>
-    const form = document.querySelector("form");
-
-    const titleInput = document.querySelector("input[name=title]");
-    titleInput.value = title;
-    titleInput.addEventListener("change", () => form.submit());
-
-    const genreInput = document.querySelector("select[name=genre]");
-    genreInput.value = selectedGenre;
-    genreInput.addEventListener("change", () => form.submit());
-</script>
 
 <script>
     const targetNode = document.getElementById("end-of-list")!;
@@ -166,32 +86,4 @@ const [[{ count }], genres] = await Promise.all([
     document.addEventListener("DOMContentLoaded", () =>
         observer.observe(targetNode),
     );
-</script>
-
-<script>
-    const btn = document.querySelector("button#toggle-search");
-    const searchBox = document.querySelector("form:has(button#toggle-search)");
-
-    if (btn && searchBox) {
-        searchBox.setAttribute(
-            "style",
-            "--search-offset: calc(100% - 42px - 20px - 20px)",
-        );
-        let searchOpened = false;
-
-        btn.addEventListener("click", (e) => {
-            searchOpened = !searchOpened;
-
-            if (searchOpened) {
-                searchBox.setAttribute("style", "--search-offset: unset");
-                btn.textContent = "Close search";
-            } else {
-                searchBox.setAttribute(
-                    "style",
-                    "--search-offset: calc(100% - 42px - 20px - 20px)",
-                );
-                btn.textContent = "Open search";
-            }
-        });
-    }
 </script>

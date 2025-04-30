@@ -2,41 +2,17 @@
 import { getList } from "../pages/db/_list";
 
 type Props = {
-    title?: string;
-    selectedGenre?: string;
-    pinkPaw?: boolean;
-    page: number;
-    untilPage?: boolean;
+    releases: Array<
+        Awaited<ReturnType<typeof getList>>[number] & { bookmarked?: boolean }
+    >;
 };
-
-const releases = (
-    Astro.props.untilPage
-        ? await Promise.all(
-              [...Array(Astro.props.page + 1).keys()].flatMap((page) =>
-                  getList({
-                      title: Astro.props.title,
-                      selectedGenre: Astro.props.selectedGenre,
-                      pinkPaw: Astro.props.pinkPaw,
-                      page,
-                  }),
-              ),
-          )
-        : [
-              await getList({
-                  title: Astro.props.title,
-                  selectedGenre: Astro.props.selectedGenre,
-                  pinkPaw: Astro.props.pinkPaw,
-                  page: Astro.props.page,
-              }),
-          ]
-).flat();
 ---
 
 <ul
     class="my-5 pb-[50vh] lg:pb-12 grid grid-cols-2 lg:grid-cols-5 gap-4 justify-center"
 >
     {
-        releases.map((release) => (
+        Astro.props.releases.map((release) => (
             <li
                 aria-name={release.title}
                 class="relative group aspect-[3/4] shadow-lg hover:shadow-red-900/30"
@@ -65,6 +41,24 @@ const releases = (
                             {release.published.toLocaleDateString()}{" "}
                         </span>
                     </div>
+                    {release.bookmarked ? (
+                        <div class="absolute top-0 right-0 p-1 m-2 rounded-full bg-red-200 border-2 border-red-500 text-red-500">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-bookmark-icon lucide-bookmark mx-auto"
+                            >
+                                <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z" />
+                            </svg>
+                        </div>
+                    ) : null}
                     {release.pinkPaw ? (
                         <div class="absolute animate-bounce-once bg-pink-100 border-2 border-pink-400 rounded-full bottom-0 right-0 p-1 m-2 text-pink-400">
                             <svg

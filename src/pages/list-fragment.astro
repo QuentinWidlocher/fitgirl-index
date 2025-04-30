@@ -1,17 +1,26 @@
 ---
 import ReleaseList from "../components/ReleaseList.astro";
+import { getList } from "./db/_list";
+
+export const partial = true;
 
 let page = parseInt(Astro.url.searchParams.get("p") || "1") - 1;
 let selectedGenre = Astro.url.searchParams.get("genre");
 let pinkPaw = Astro.url.searchParams.has("pinkpaw");
 let title = Astro.url.searchParams.get("title");
+let bookmarked = Astro.url.searchParams.has("bookmarked");
 
-export const partial = true;
+const bookmarks: string[] = Astro.cookies?.get("bookmarks")?.json() ?? [];
+
+let releases = (
+    await getList({
+        title,
+        selectedGenre,
+        pinkPaw,
+        page,
+        slugs: bookmarked ? bookmarks : undefined,
+    })
+).map((r) => ({ ...r, bookmarked: bookmarks.includes(r.slug) }));
 ---
 
-<ReleaseList
-    title={title ?? undefined}
-    pinkPaw={pinkPaw}
-    selectedGenre={selectedGenre ?? undefined}
-    page={page}
-/>
+<ReleaseList {releases} />

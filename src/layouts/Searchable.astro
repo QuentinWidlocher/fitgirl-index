@@ -1,0 +1,174 @@
+---
+import { db, Release, Genre } from "astro:db";
+import { count as countFn } from "astro:db";
+
+type Props = {
+    pageTitle?: string;
+};
+
+const { pageTitle } = Astro.props;
+
+const [[{ count }], genres] = await Promise.all([
+    db.select({ count: countFn() }).from(Release),
+    db.select().from(Genre).orderBy(Genre.name),
+]);
+
+let selectedGenre = Astro.url.searchParams.get("genre");
+let title = Astro.url.searchParams.get("title");
+let pinkPaw = Astro.url.searchParams.has("pinkpaw");
+let bookmarked = Astro.url.searchParams.has("bookmarked");
+---
+
+<main class="container mx-auto">
+    <h1 class="my-5 pt-10 text-center flex flex-col">
+        <span class="text-4xl">{pageTitle ?? "FitGirl Repacks Index"}</span>
+        <span class="text-gray-500 text-lg">
+            ({count} games)
+        </span>
+    </h1>
+
+    <div
+        class="mx-5 flex flex-col-reverse lg:grid h-full lg:grid-rows-1 lg:grid-cols-[1fr_3fr] gap-10"
+    >
+        <form
+            class="max-lg:fixed bg-gray-800 p-5 w-full rounded-tr-xl right-0 bottom-0 max-lg:translate-y-[--search-offset] z-10 lg:bottom-unset transition-transform"
+        >
+            <button
+                id="toggle-search"
+                type="button"
+                class="lg:hidden mb-5 w-full bg-red-500/30 active:bg-red-500/50 hover:bg-red-500/50 hover:shadow-lg hover:shadow-red-900/50 border-red-500 mt-auto text-red-100 rounded px-3 py-2"
+                >Open search</button
+            >
+            <div class="lg:sticky lg:top-10">
+                <div class="flex flex-col gap-5">
+                    <label class="flex flex-col">
+                        <span> Search by title </span>
+                        <input
+                            name="title"
+                            class="bg-gray-700 shadow-lg border border-transparent focus:border focus:border-red-500 focus:shadow-red-900/30 outline-none h-10 rounded px-3 py-2"
+                            value={title}
+                        />
+                    </label>
+                    <label class="flex flex-col">
+                        <span> Genre </span>
+                        <select
+                            name="genre"
+                            class="bg-gray-700 border border-transparent shadow-lg focus:border focus:border-red-500 focus:shadow-red-900/30 outline-none rounded px-3 py-2"
+                        >
+                            {
+                                genres.map((genre) => (
+                                    <option
+                                        value={genre.name}
+                                        selected={genre.name == selectedGenre}
+                                    >
+                                        {genre.name}
+                                    </option>
+                                ))
+                            }
+                        </select>
+                    </label>
+
+                    <div class="flex gap-2 w-full">
+                        <label>
+                            <span>Pink paw award</span>
+                            <input
+                                type="checkbox"
+                                name="pinkpaw"
+                                checked={pinkPaw}
+                            />
+                        </label>
+                        <label>
+                            <span>Bookmarked</span>
+                            <input
+                                type="checkbox"
+                                name="bookmarked"
+                                checked={bookmarked}
+                            />
+                        </label>
+                    </div>
+
+                    <div class="flex gap-2 w-full mt-10">
+                        <button
+                            class="flex-1 hover:bg-red-500/30 border hover:shadow-lg hover:shadow-red-900/30 border-red-500 mt-auto text-red-100 rounded px-3 py-2"
+                            type="reset"
+                            onclick="location.href = '/'"
+                        >
+                            Reset
+                        </button>
+                        <button
+                            class="flex-1 bg-red-500 hover:bg-red-600 hover:shadow-lg hover:shadow-red-900/30 mt-auto text-white rounded px-3 py-2"
+                        >
+                            Search
+                        </button>
+                    </div>
+                    <div class="justify-between mt-5 hidden lg:flex">
+                        <a
+                            href="https://github.com/QuentinWidlocher/fitgirl-index"
+                            target="_blank"
+                            class="mt-auto text-gray-500 hover:underline underline-offset-2 text-sm"
+                            >See on GitHub</a
+                        >
+                        <a
+                            href="https://fitgirl-repacks.site/"
+                            target="_blank"
+                            class="mt-auto text-gray-500 hover:underline underline-offset-2 text-sm"
+                            >Powered by FitGirl</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </form>
+        <slot />
+    </div>
+</main>
+
+<script>
+    // Search on field change
+
+    const form = document.querySelector("form");
+
+    if (form) {
+        document
+            .querySelector("input[name=title]")
+            ?.addEventListener("change", () => form.submit());
+        document
+            .querySelector("select[name=genre]")
+            ?.addEventListener("change", () => form.submit());
+        document
+            .querySelector("input[name=pinkpaw]")
+            ?.addEventListener("change", () => form.submit());
+        document
+            .querySelector("input[name=bookmarked]")
+            ?.addEventListener("change", () => form.submit());
+    }
+</script>
+
+<script>
+    // Toggle search on mobile
+
+    const btn = document.querySelector("button#toggle-search");
+    const searchBox = document.querySelector("form:has(button#toggle-search)");
+
+    if (btn && searchBox) {
+        searchBox.setAttribute(
+            "style",
+            "--search-offset: calc(100% - 42px - 20px - 20px)",
+        );
+        let searchOpened = false;
+
+        btn.addEventListener("click", (e) => {
+            searchOpened = !searchOpened;
+
+            if (searchOpened) {
+                searchBox.setAttribute("style", "--search-offset: unset");
+                btn.textContent = "Close search";
+            } else {
+                searchBox.setAttribute(
+                    "style",
+                    "--search-offset: calc(100% - 42px - 20px - 20px)",
+                );
+                btn.textContent = "Open search";
+            }
+        });
+    }
+</script>

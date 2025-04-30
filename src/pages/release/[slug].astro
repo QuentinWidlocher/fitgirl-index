@@ -24,6 +24,11 @@ Astro.response.headers.set(
     Astro.params.slug.replace(/[^a-z0-9]/gi, "_"),
 );
 
+const bookmarked = Astro.cookies
+    ?.get("bookmarks")
+    ?.json()
+    .includes(Astro.params.slug);
+
 let [rawRelease] = await db
     .select()
     .from(Release)
@@ -111,7 +116,31 @@ const release = {
                 }
             </ul>
         </section>
-        <section class="bg-gray-600 rounded-t-xl lg:rounded-b-xl p-10">
+        <section
+            class="bg-gray-600 rounded-t-xl lg:rounded-b-xl p-10 flex flex-col"
+        >
+            <button
+                id="bookmark"
+                data-slug={Astro.params.slug}
+                aria-checked={bookmarked}
+                class="z-10 aspect-square w-10 h-10 bg-gray-500 aria-checked:bg-red-200 aria-checked:border-2 aria-checked:border-red-500 aria-checked:text-red-500 rounded-full ml-auto -mb-5 -mt-5 -mr-5"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-bookmark-icon lucide-bookmark mx-auto"
+                    ><path
+                        d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"
+                    ></path></svg
+                ></button
+            >
             <div class="flex gap-5">
                 {
                     release.pinkPaw ? (
@@ -264,4 +293,18 @@ const release = {
             el.append(backdrop);
         });
     });
+</script>
+
+<script>
+    import { actions } from "astro:actions";
+
+    const btn = document.querySelector("button#bookmark");
+    const slug = btn?.getAttribute("data-slug");
+
+    if (btn && slug) {
+        btn.addEventListener("click", async () => {
+            const result = await actions.toggleBookmark(slug);
+            btn.setAttribute("aria-checked", result.data ? "true" : "");
+        });
+    }
 </script>

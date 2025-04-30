@@ -6,7 +6,9 @@ import db from '@astrojs/db';
 
 // https://astro.build/config
 export default defineConfig({
-  adapter: netlify(),
+  adapter: netlify({
+    cacheOnDemandPages: true,
+  }),
   integrations: [tailwind(), db()],
   prefetch: true,
   output: 'server',
