@@ -58,7 +58,11 @@ const release = {
 };
 ---
 
-<Layout title={`${release.title} - FitGirl Index`}>
+<Layout
+    title={`${release.title.split(/[-–,]/g).at(0)} - FitGirl Index`}
+    description={release.title.split(/[-–,]/g).slice(1).join("")}
+    imageUrl={release.coverSrc}
+>
     <button
         aria-label="Back"
         class="fixed top-5 left-5 z-50 aspect-square w-7 h-7 bg-gray-500 rounded-full shadow-lg"

@@ -1,7 +1,12 @@
 ---
 import { Font } from "astro:assets";
-type Props = { title: string };
-const { title } = Astro.props;
+type Props = {
+    title: string;
+    description?: string;
+    imageUrl?: string;
+    type?: "article" | "website";
+};
+const { title, description, imageUrl, type } = Astro.props;
 ---
 
 <!doctype html>
@@ -13,10 +18,29 @@ const { title } = Astro.props;
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
+
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="icon" href="/favicon.ico" sizes="48x48" />
         <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
         <link rel="manifest" href="/site.webmanifest" />
+        <meta property="og:title" content={title} />
+        <meta property="twitter:title" content={title} />
+        {
+            description && (
+                <meta name="description" content={description}>
+                <meta property="og:description" content={description} />
+                <meta property="twitter:description" content={description} />
+            )
+        }
+        {imageUrl &&
+            <meta property="og:image" content={imageUrl} />
+            <meta property="twitter:image" content={imageUrl} />
+        }
+        <meta property="og:url" content={Astro.url.toString()} />
+        <meta property="twitter:url" content={Astro.url.toString()} />
+        <meta property="twitter:domain" content={Astro.url.origin.toString()}>
+        <meta property="og:type" content={type || "article"} />
+        <meta name="twitter:card" content="summary_large_image">
         <meta
             name="theme-color"
             content="#ef4444"
