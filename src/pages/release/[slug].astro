@@ -267,17 +267,43 @@ const release = {
 </Layout>
 
 <script is:inline>
-    document.querySelectorAll("li[id^=screenshot]").forEach((el) => {
+    document.querySelectorAll("li[id^=screenshot]").forEach((el, i, list) => {
         const screenshotUrl = el.querySelector("img").getAttribute("src");
 
         el.addEventListener("click", () => {
+            let currentIndex = i;
+
+            function changeImg(delta) {
+                currentIndex = (currentIndex + delta) % list.length;
+
+                const nextEl = [...list].at(currentIndex);
+                const nextScreenshotUrl = nextEl
+                    .querySelector("img")
+                    .getAttribute("src");
+
+                img.src = nextScreenshotUrl.replace(".240p.jpg", "");
+            }
+
+            const onKeyEvent = (e) => {
+                if (e.key == "ArrowRight") {
+                    changeImg(1);
+                } else if (e.key == "ArrowLeft") {
+                    changeImg(-1);
+                } else if (e.key == "Escape") {
+                    close();
+                }
+            };
+
+            const close = (ev) => {
+                ev?.stopPropagation();
+                window.removeEventListener("keyup", onKeyEvent);
+                backdrop.remove();
+            };
+
             const backdrop = document.createElement("div");
             backdrop.className =
                 "cursor-pointer p-1 lg:p-20 z-20 fixed top-0 left-0 w-screen h-screen grid place-content-center bg-black/50";
-            backdrop.addEventListener("click", (ev) => {
-                ev.stopPropagation();
-                backdrop.remove();
-            });
+            backdrop.addEventListener("click", close);
 
             const imgContainer = document.createElement("div");
             imgContainer.className = "relative";
@@ -293,6 +319,8 @@ const release = {
             img.src = screenshotUrl.replace(".240p.jpg", "");
 
             imgContainer.append(img);
+
+            window.addEventListener("keyup", onKeyEvent);
 
             el.append(backdrop);
         });
