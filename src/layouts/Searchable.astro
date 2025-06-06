@@ -15,8 +15,8 @@ const [[{ count }], genres, companies] = await Promise.all([
     db.select().from(Company).orderBy(Company.name),
 ]);
 
-let selectedGenre = Astro.url.searchParams.get("genre");
-let selectedCompany = Astro.url.searchParams.get("company");
+let genre = Astro.url.searchParams.get("genre");
+let company = Astro.url.searchParams.get("company");
 let title = Astro.url.searchParams.get("title");
 let pinkPaw = Astro.url.searchParams.has("pinkpaw");
 let bookmarked = Astro.url.searchParams.has("bookmarked");
@@ -34,7 +34,7 @@ let bookmarked = Astro.url.searchParams.has("bookmarked");
         class="mx-5 flex flex-col-reverse lg:grid h-full lg:grid-rows-1 lg:grid-cols-[1fr_3fr] gap-10"
     >
         <form
-            class="max-lg:fixed bg-gray-800 p-5 w-full rounded-tr-xl right-0 bottom-0 max-lg:translate-y-[--search-offset] z-10 lg:bottom-unset transition-transform max-w-96"
+            class="max-lg:fixed bg-gray-800 p-5 w-full rounded-tr-xl right-0 bottom-0 max-lg:translate-y-[--search-offset] z-10 lg:bottom-unset transition-transform lg:max-w-96"
         >
             <button
                 id="toggle-search"
@@ -54,59 +54,53 @@ let bookmarked = Astro.url.searchParams.has("bookmarked");
                     </label>
                     <label class="flex flex-col">
                         <span> Genre </span>
-                        <select
+                        <input
                             name="genre"
-                            class="bg-gray-700 border border-transparent shadow-lg focus:border focus:border-red-500 focus:shadow-red-900/30 outline-none rounded px-3 py-2"
-                        >
+                            list="genre"
+                            class="bg-gray-700 shadow-lg border border-transparent focus:border focus:border-red-500 focus:shadow-red-900/30 outline-none h-10 rounded px-3 py-2"
+                            value={genre}
+                        />
+                        <datalist id="genre">
                             {
                                 genres.map((genre) => (
-                                    <option
-                                        value={genre.name}
-                                        selected={genre.name == selectedGenre}
-                                    >
-                                        {genre.name}
-                                    </option>
+                                    <option value={genre.name} />
                                 ))
                             }
-                        </select>
+                        </datalist>
                     </label>
                     <label class="flex flex-col">
                         <span> Company </span>
-                        <select
+                        <input
                             name="company"
-                            class="bg-gray-700 border border-transparent shadow-lg focus:border focus:border-red-500 focus:shadow-red-900/30 outline-none rounded px-3 py-2"
-                        >
+                            list="company"
+                            class="bg-gray-700 shadow-lg border border-transparent focus:border focus:border-red-500 focus:shadow-red-900/30 outline-none h-10 rounded px-3 py-2"
+                            value={company}
+                        />
+                        <datalist id="company">
                             {
                                 companies.map((company) => (
-                                    <option
-                                        value={company.name}
-                                        selected={
-                                            company.name == selectedCompany
-                                        }
-                                    >
-                                        {company.name}
-                                    </option>
+                                    <option value={company.name} />
                                 ))
                             }
-                        </select>
+                        </datalist>
                     </label>
 
-                    <div class="flex gap-2 w-full content-between">
-                        <label class="flex-1">
-                            <span>Pink paw award</span>
+                    <div class="flex flex-wrap gap-3 w-full content-between">
+                        <label class="flex-1 whitespace-nowrap">
                             <input
                                 type="checkbox"
                                 name="pinkpaw"
                                 checked={pinkPaw}
                             />
+                            <span>Pink paw award</span>
                         </label>
-                        <label class="flex-1">
-                            <span>Bookmarked</span>
+                        <label class="flex-1 whitespace-nowrap">
                             <input
                                 type="checkbox"
                                 name="bookmarked"
                                 checked={bookmarked}
                             />
+                            <span>Bookmarked</span>
                         </label>
                     </div>
 

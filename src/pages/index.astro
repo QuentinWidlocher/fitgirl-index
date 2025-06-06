@@ -22,8 +22,8 @@ export const prerender = false;
 // Astro.response.headers.set("Cache-Tag", cacheTags.index);
 
 let page = (Number(Astro.url.searchParams.get("p")) || 1) - 1;
-let selectedGenre = Astro.url.searchParams.get("genre");
-let selectedCompany = Astro.url.searchParams.get("company");
+let genre = Astro.url.searchParams.get("genre");
+let company = Astro.url.searchParams.get("company");
 let title = Astro.url.searchParams.get("title");
 let pinkPaw = Astro.url.searchParams.has("pinkpaw");
 let bookmarked = Astro.url.searchParams.has("bookmarked");
@@ -35,11 +35,11 @@ let releases = (
         [...Array(page + 1).keys()].flatMap((page) =>
             getList({
                 title,
-                selectedGenre,
+                genre,
                 pinkPaw,
                 page,
                 slugs: bookmarked ? bookmarks : undefined,
-                selectedCompany,
+                company,
             }),
         ),
     )

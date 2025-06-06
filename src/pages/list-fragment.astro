@@ -5,8 +5,8 @@ import { getList } from "./db/_list";
 export const partial = true;
 
 let page = parseInt(Astro.url.searchParams.get("p") || "1") - 1;
-let selectedGenre = Astro.url.searchParams.get("genre");
-let selectedCompany = Astro.url.searchParams.get("company");
+let genre = Astro.url.searchParams.get("genre");
+let company = Astro.url.searchParams.get("company");
 let pinkPaw = Astro.url.searchParams.has("pinkpaw");
 let title = Astro.url.searchParams.get("title");
 let bookmarked = Astro.url.searchParams.has("bookmarked");
@@ -16,11 +16,11 @@ const bookmarks: string[] = Astro.cookies?.get("bookmarks")?.json() ?? [];
 let releases = (
     await getList({
         title,
-        selectedGenre,
+        genre,
         pinkPaw,
         page,
         slugs: bookmarked ? bookmarks : undefined,
-        selectedCompany,
+        company,
     })
 ).map((r) => ({ ...r, bookmarked: bookmarks.includes(r.slug) }));
 ---

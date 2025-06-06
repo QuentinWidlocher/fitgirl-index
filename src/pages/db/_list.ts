@@ -15,15 +15,15 @@ const PAGE_SIZE = 100;
 export async function getList({
   page = 1,
   pinkPaw,
-  selectedCompany,
-  selectedGenre,
+  company,
+  genre,
   slugs,
   title,
 }: {
   page?: number;
   pinkPaw?: boolean | null;
-  selectedCompany?: string | null;
-  selectedGenre?: string | null;
+  company?: string | null;
+  genre?: string | null;
   slugs?: string[];
   title?: string | null;
 }) {
@@ -43,17 +43,18 @@ export async function getList({
 
   let query = db.select().from(Release).$dynamic();
 
-  if (selectedGenre) {
-    conditions.push(eq(ReleaseGenres.genre, selectedGenre));
+  if (genre) {
+    conditions.push(like(ReleaseGenres.genre, `%${genre}%`));
+
     // @ts-ignore
     query = query
       .innerJoin(ReleaseGenres, eq(Release.id, ReleaseGenres.releaseId))
       .groupBy(Release.id);
   }
 
-  if (selectedCompany) {
-    console.debug("selectedCompany", selectedCompany);
-    conditions.push(eq(ReleaseCompanies.company, selectedCompany));
+  if (company) {
+    conditions.push(like(ReleaseCompanies.company, `%${company}%`));
+
     // @ts-ignore
     query = query
       .innerJoin(ReleaseCompanies, eq(Release.id, ReleaseCompanies.releaseId))
