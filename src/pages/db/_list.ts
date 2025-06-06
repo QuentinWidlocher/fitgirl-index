@@ -1,19 +1,31 @@
-import { like, Release, ReleaseGenres, db, eq, and, desc, inArray } from "astro:db";
+import {
+  like,
+  Release,
+  ReleaseGenres,
+  db,
+  eq,
+  and,
+  desc,
+  inArray,
+  ReleaseCompanies,
+} from "astro:db";
 
-const PAGE_SIZE = 100
+const PAGE_SIZE = 100;
 
 export async function getList({
-  title,
-  pinkPaw,
-  selectedGenre,
   page = 1,
+  pinkPaw,
+  selectedCompany,
+  selectedGenre,
   slugs,
+  title,
 }: {
-  title?: string | null,
-  pinkPaw?: boolean | null,
-  selectedGenre?: string | null,
-  page?: number,
-  slugs?: string[],
+  page?: number;
+  pinkPaw?: boolean | null;
+  selectedCompany?: string | null;
+  selectedGenre?: string | null;
+  slugs?: string[];
+  title?: string | null;
 }) {
   const conditions = [];
 
@@ -26,34 +38,39 @@ export async function getList({
   }
 
   if (slugs && slugs.length > 0) {
-    conditions.push(inArray(Release.slug, slugs))
+    conditions.push(inArray(Release.slug, slugs));
   }
 
-  let query;
+  let query = db.select().from(Release).$dynamic();
+
   if (selectedGenre) {
     conditions.push(eq(ReleaseGenres.genre, selectedGenre));
-    query = db
-      .select()
-      .from(Release)
+    // @ts-ignore
+    query = query
       .innerJoin(ReleaseGenres, eq(Release.id, ReleaseGenres.releaseId))
-      .groupBy(Release.id)
-      .limit(PAGE_SIZE)
-      .offset(PAGE_SIZE * page)
-      .where(and(...conditions))
-      .orderBy(desc(Release.published));
-  } else {
-    query = db
-      .select()
-      .from(Release)
-      .limit(PAGE_SIZE)
-      .offset(PAGE_SIZE * page)
-      .where(and(...conditions))
-      .orderBy(desc(Release.published));
+      .groupBy(Release.id);
   }
 
-  const releases = await query.then((releasesWithGenres) =>
-    releasesWithGenres.map((r) => ("Release" in r ? r.Release : r)),
+  if (selectedCompany) {
+    console.debug("selectedCompany", selectedCompany);
+    conditions.push(eq(ReleaseCompanies.company, selectedCompany));
+    // @ts-ignore
+    query = query
+      .innerJoin(ReleaseCompanies, eq(Release.id, ReleaseCompanies.releaseId))
+      .groupBy(Release.id);
+  }
+
+  query = query
+    .limit(PAGE_SIZE)
+    .offset(PAGE_SIZE * page)
+    .where(and(...conditions))
+    .orderBy(desc(Release.published));
+
+  const releases = await query.then((releasesWithRelations) =>
+    releasesWithRelations.map((r) =>
+      "Release" in r ? (r.Release as typeof r) : r
+    )
   );
 
-  return releases
+  return releases;
 }

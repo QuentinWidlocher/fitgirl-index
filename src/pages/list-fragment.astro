@@ -6,6 +6,7 @@ export const partial = true;
 
 let page = parseInt(Astro.url.searchParams.get("p") || "1") - 1;
 let selectedGenre = Astro.url.searchParams.get("genre");
+let selectedCompany = Astro.url.searchParams.get("company");
 let pinkPaw = Astro.url.searchParams.has("pinkpaw");
 let title = Astro.url.searchParams.get("title");
 let bookmarked = Astro.url.searchParams.has("bookmarked");
@@ -19,6 +20,7 @@ let releases = (
         pinkPaw,
         page,
         slugs: bookmarked ? bookmarks : undefined,
+        selectedCompany,
     })
 ).map((r) => ({ ...r, bookmarked: bookmarks.includes(r.slug) }));
 ---

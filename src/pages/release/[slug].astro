@@ -205,14 +205,6 @@ const release = {
             <div class="flex gap-5 mt-2 mb-5">
                 <div class="text-gray-300">
                     <span>
-                        {companies.length > 1 ? "Companies" : "Company"} :
-                    </span>
-                    <strong>
-                        {companies.map((c) => c.company).join(", ")}
-                    </strong>
-                </div>
-                <div class="text-gray-300">
-                    <span>
                         {languages.length > 1 ? "Languages" : "Language"} :
                     </span>
                     <strong>
@@ -221,23 +213,49 @@ const release = {
                 </div>
             </div>
 
-            <ul
-                class="flex gap-2 max-lg:-mx-10 max-lg:pl-10 overflow-x-auto p-5 pl-0 -my-3"
-            >
-                {
-                    genres.map(({ genre }) => (
-                        <li>
-                            <a
-                                class="px-2 py-1 rounded bg-gray-500 hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/30 whitespace-nowrap"
-                                href={`/?genre=${genre}`}
-                            >
-                                {" "}
-                                {genre}{" "}
-                            </a>
-                        </li>
-                    ))
-                }
-            </ul>
+            <div class="flex items-center flex-wrap">
+                <strong class="w-24">
+                    {companies.length > 1 ? "Companies" : "Company"}
+                </strong>
+                <ul
+                    class="flex gap-2 max-lg:-mx-10 max-lg:pl-10 overflow-x-auto p-5 pl-0 -my-3"
+                >
+                    {
+                        companies.map(({ company }) => (
+                            <li>
+                                <a
+                                    class="px-2 py-1 rounded bg-gray-500 hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/30 whitespace-nowrap"
+                                    href={`/?company=${company}`}
+                                >
+                                    {company}
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+
+            <div class="flex items-center flex-wrap">
+                <strong class="w-24">
+                    {genres.length > 1 ? "Genres" : "Genre"}
+                </strong>
+                <ul
+                    class="flex gap-2 max-lg:-mx-10 max-lg:pl-10 overflow-x-auto p-5 pl-0 -my-3"
+                >
+                    {
+                        genres.map(({ genre }) => (
+                            <li>
+                                <a
+                                    class="px-2 py-1 rounded bg-gray-500 hover:bg-red-500 hover:shadow-lg hover:shadow-red-500/30 whitespace-nowrap"
+                                    href={`/?genre=${genre}`}
+                                >
+                                    {genre}
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
 
             <ul class="flex flex-col gap-5 my-10">
                 {

@@ -1,4 +1,5 @@
 ---
+import { Company } from "astro:db";
 import { db, Release, Genre } from "astro:db";
 import { count as countFn } from "astro:db";
 
@@ -8,12 +9,14 @@ type Props = {
 
 const { pageTitle } = Astro.props;
 
-const [[{ count }], genres] = await Promise.all([
+const [[{ count }], genres, companies] = await Promise.all([
     db.select({ count: countFn() }).from(Release),
     db.select().from(Genre).orderBy(Genre.name),
+    db.select().from(Company).orderBy(Company.name),
 ]);
 
 let selectedGenre = Astro.url.searchParams.get("genre");
+let selectedCompany = Astro.url.searchParams.get("company");
 let title = Astro.url.searchParams.get("title");
 let pinkPaw = Astro.url.searchParams.has("pinkpaw");
 let bookmarked = Astro.url.searchParams.has("bookmarked");
@@ -31,7 +34,7 @@ let bookmarked = Astro.url.searchParams.has("bookmarked");
         class="mx-5 flex flex-col-reverse lg:grid h-full lg:grid-rows-1 lg:grid-cols-[1fr_3fr] gap-10"
     >
         <form
-            class="max-lg:fixed bg-gray-800 p-5 w-full rounded-tr-xl right-0 bottom-0 max-lg:translate-y-[--search-offset] z-10 lg:bottom-unset transition-transform"
+            class="max-lg:fixed bg-gray-800 p-5 w-full rounded-tr-xl right-0 bottom-0 max-lg:translate-y-[--search-offset] z-10 lg:bottom-unset transition-transform max-w-96"
         >
             <button
                 id="toggle-search"
@@ -67,9 +70,29 @@ let bookmarked = Astro.url.searchParams.has("bookmarked");
                             }
                         </select>
                     </label>
+                    <label class="flex flex-col">
+                        <span> Company </span>
+                        <select
+                            name="company"
+                            class="bg-gray-700 border border-transparent shadow-lg focus:border focus:border-red-500 focus:shadow-red-900/30 outline-none rounded px-3 py-2"
+                        >
+                            {
+                                companies.map((company) => (
+                                    <option
+                                        value={company.name}
+                                        selected={
+                                            company.name == selectedCompany
+                                        }
+                                    >
+                                        {company.name}
+                                    </option>
+                                ))
+                            }
+                        </select>
+                    </label>
 
-                    <div class="flex gap-2 w-full">
-                        <label>
+                    <div class="flex gap-2 w-full content-between">
+                        <label class="flex-1">
                             <span>Pink paw award</span>
                             <input
                                 type="checkbox"
@@ -77,7 +100,7 @@ let bookmarked = Astro.url.searchParams.has("bookmarked");
                                 checked={pinkPaw}
                             />
                         </label>
-                        <label>
+                        <label class="flex-1">
                             <span>Bookmarked</span>
                             <input
                                 type="checkbox"
@@ -135,6 +158,9 @@ let bookmarked = Astro.url.searchParams.has("bookmarked");
             .querySelector("select[name=genre]")
             ?.addEventListener("change", () => form.submit());
         document
+            .querySelector("select[name=company]")
+            ?.addEventListener("change", () => form.submit());
+        document
             .querySelector("input[name=pinkpaw]")
             ?.addEventListener("change", () => form.submit());
         document
@@ -156,7 +182,7 @@ let bookmarked = Astro.url.searchParams.has("bookmarked");
         );
         let searchOpened = false;
 
-        btn.addEventListener("click", (e) => {
+        btn.addEventListener("click", () => {
             searchOpened = !searchOpened;
 
             if (searchOpened) {
