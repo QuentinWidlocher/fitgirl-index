@@ -13,17 +13,17 @@ import {
 const PAGE_SIZE = 100;
 
 export async function getList({
-  page = 1,
-  pinkPaw,
   company,
   genre,
+  page = 1,
+  pinkPaw,
   slugs,
   title,
 }: {
-  page?: number;
-  pinkPaw?: boolean | null;
   company?: string | null;
   genre?: string | null;
+  page?: number;
+  pinkPaw?: boolean | null;
   slugs?: string[];
   title?: string | null;
 }) {

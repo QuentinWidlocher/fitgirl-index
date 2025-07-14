@@ -15,12 +15,12 @@ const bookmarks: string[] = Astro.cookies?.get("bookmarks")?.json() ?? [];
 
 let releases = (
     await getList({
-        title,
-        genre,
-        pinkPaw,
-        page,
-        slugs: bookmarked ? bookmarks : undefined,
         company,
+        genre,
+        page,
+        pinkPaw,
+        slugs: bookmarked ? bookmarks : undefined,
+        title,
     })
 ).map((r) => ({ ...r, bookmarked: bookmarks.includes(r.slug) }));
 ---

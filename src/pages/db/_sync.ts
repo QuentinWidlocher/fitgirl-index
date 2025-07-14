@@ -1,5 +1,3 @@
-import { parse as parseHTML } from "node-html-parser";
-import { z } from "zod";
 import {
   Company,
   db,
@@ -8,15 +6,16 @@ import {
   Genre,
   Language,
   like,
-  not,
   or,
   Release,
+  ReleaseCompanies,
   ReleaseGenres,
   ReleaseLanguages,
 } from "astro:db";
-import slug from "slug";
-import { ReleaseCompanies } from "astro:db";
+import { parse as parseHTML } from "node-html-parser";
 import Parser from "rss-parser";
+import slug from "slug";
+import { z } from "zod";
 import { genreAliases } from "./_genreAliases";
 
 const base_url = "https://fitgirl-repacks.site/";
@@ -164,6 +163,10 @@ async function getGame(url: string) {
     }
   }
 
+  const newGenres = content
+    .querySelectorAll("h3 + p a[href*=tag]")
+    .map((anchor) => decode(anchor.textContent));
+
   let { genres, companies, languages, originalSize, repackSize } = content
     .querySelectorAll("h3 + p strong")
     .reduce((acc, info) => {
@@ -205,7 +208,7 @@ async function getGame(url: string) {
 
   parsedContent = {
     ...parsedContent,
-    genres,
+    genres: [...(genres ?? []), ...newGenres],
     companies,
     languages,
     originalSize,
@@ -348,9 +351,9 @@ export async function syncAll() {
     try {
       console.log(game.title);
       const release = await getGame(game.link);
-      console.log("☑️ parsed");
+      console.log("☑️ Parsed");
       const storedGame = await storeGame(release);
-      console.log("☑️ stored");
+      console.log("☑️ Stored");
       addedGames.push(storedGame);
     } catch (e) {
       if (e instanceof Error) {
@@ -386,9 +389,9 @@ export async function syncLatest() {
 
     try {
       const release = await getGame(url);
-      console.log("☑️ parsed");
+      console.log("☑️ Parsed");
       const storedGame = await storeGame(release);
-      console.log("☑️ stored");
+      console.log("☑️ Stored");
       addedGames.push(storedGame);
     } catch (e: unknown) {
       if (e instanceof Error) {
@@ -428,9 +431,9 @@ export async function syncRss() {
     console.log(releaseToAdd.title);
     try {
       const release = await getGame(releaseToAdd.link);
-      console.log("☑️ parsed");
+      console.log("☑️ Parsed");
       const storedGame = await storeGame(release);
-      console.log("☑️ stored");
+      console.log("☑️ Stored");
       addedGames.push(storedGame);
     } catch (e: unknown) {
       if (e instanceof Error) {

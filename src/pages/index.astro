@@ -1,11 +1,7 @@
 ---
-import { db, Genre, like, desc, and } from "astro:db";
 import { getList } from "../pages/db/_list";
 import Layout from "../layouts/Layout.astro";
-import { Release } from "astro:db";
-import { count as countFn } from "astro:db";
 import ReleaseList from "../components/ReleaseList.astro";
-import { cacheDuration, cacheTags } from "../cache-tags";
 import Searchable from "../layouts/Searchable.astro";
 
 export const prerender = false;
@@ -34,12 +30,12 @@ let releases = (
     await Promise.all(
         [...Array(page + 1).keys()].flatMap((page) =>
             getList({
-                title,
-                genre,
-                pinkPaw,
-                page,
-                slugs: bookmarked ? bookmarks : undefined,
                 company,
+                genre,
+                page,
+                pinkPaw,
+                slugs: bookmarked ? bookmarks : undefined,
+                title,
             }),
         ),
     )
